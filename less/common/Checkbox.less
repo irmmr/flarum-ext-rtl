@@ -1,0 +1,24 @@
+.Checkbox--switch {
+  --left-pad: 65px;
+
+  padding-right: var(--left-pad);
+
+  .Checkbox-display {
+    float: right;
+    margin-right: calc(~"0px - var(--left-pad)");
+    margin-left: auto;
+  }
+}
+
+.Checkbox--switch .Checkbox-display {
+  &:before {
+    right: 3px;
+    left: auto;
+    transition: opacity 0.2s, right 0.2s;
+
+    .on& {
+      right: 25px;
+      left: auto;
+    }
+  }
+}
