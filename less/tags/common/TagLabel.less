@@ -6,3 +6,17 @@
     }
   }
 }
+
+.TagsLabel {
+  .TagLabel {
+    &:first-child {
+      border-radius: 0 @border-radius @border-radius 0;
+    }
+    &:last-child {
+      border-radius: @border-radius 0 0 @border-radius;
+    }
+    &:first-child:last-child {
+      border-radius: @border-radius;
+    }
+  }
+}
