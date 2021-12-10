@@ -2,8 +2,7 @@
   "name": "irmmr/flarum-ext-rtl",
   "type": "flarum-extension",
   "keywords": ["RTL", "flarum-rtl", "flarum"],
-  "description": "Flarum rtl support.",
-  "minimum-stability": "stable",
+  "description": "A collection of Right-to-Left (rtl) direction support for \"Flarum\" core and extensions.",
   "license": "MIT",
   "authors": [
     {
