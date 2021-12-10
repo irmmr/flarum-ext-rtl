@@ -175,36 +175,19 @@ p {
 .ButtonGroup > .Button:first-child:not(:last-child):not(.Dropdown-toggle) {
   margin-right: 0;
   margin-left: auto;
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
+  border-radius: 0 3px 3px 0;
 }
 .ButtonGroup > .Button:last-child:not(:first-child),
 .ButtonGroup > .Button.Dropdown-toggle:not(:first-child) {
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
+  border-radius: 3px 0 0 3px;
 }
 .ButtonGroup .Button + .Button {
-  margin-left: auto;
-  margin-right: 1px;
-}
-.Button .Button-label {
-  transition: margin-left 0.1s;
+  margin-left: auto !important;
+  margin-right: 0;
 }
 .Button .LoadingIndicator-container {
   margin-right: 4px;
   margin-left: auto;
-}
-.Button--square {
-  padding-right: 9px;
-  padding-left: 9px;
-}
-.Button--primary {
-  padding-right: 20px;
-  padding-left: 20px;
 }
 .SessionDropdown .Dropdown-toggle .Avatar {
   margin: -2px -6px -2px 5px;
@@ -233,7 +216,6 @@ p {
 .Checkbox--switch .Checkbox-display:before {
   right: 3px;
   left: auto;
-  transition: opacity 0.2s, right 0.2s;
 }
 .on.Checkbox--switch .Checkbox-display:before {
   right: 25px;
@@ -280,19 +262,39 @@ p {
 .EditUserModal-groups .Badge {
   margin: -3px 0 -3px 3px;
 }
+label {
+  text-align: right !important;
+}
 @media (min-width: 768px) {
   .Modal-close {
     left: 10px;
     right: auto;
   }
 }
+.Modal .Modal-content .Modal-header {
+  text-align: center;
+}
+.Modal .Modal-content .Modal-header h3 {
+  text-align: center !important;
+}
+.Navigation-back {
+  border-radius: var(--border-radius) !important;
+  transition: border-radius 0.2s;
+}
 .Navigation-pin {
   margin-left: auto !important;
   margin-right: -5px !important;
+  border-radius: var(--border-radius) 0 0 var(--border-radius);
+  transition: opacity 0.2s, margin-left 0.2s;
 }
 @media (min-width: 1100px) {
+  .hasPane.panePinned .Navigation-back,
+  .hasPane.paneShowing .Navigation-back {
+    border-radius: 0 var(--border-radius) var(--border-radius) 0 !important;
+  }
   .hasPane.panePinned .Navigation-pin,
   .hasPane.paneShowing .Navigation-pin {
+    opacity: 1;
     margin-right: 1px !important;
     margin-left: auto !important;
   }
@@ -368,12 +370,12 @@ p {
   margin-left: auto;
 }
 .tooltip.right .tooltip-arrow {
-  right: 0;
-  left: auto;
-}
-.tooltip.left .tooltip-arrow {
   right: auto;
   left: 0;
+}
+.tooltip.left .tooltip-arrow {
+  right: 0;
+  left: auto;
 }
 .tooltip.bottom .tooltip-arrow {
   right: 50%;
@@ -394,11 +396,6 @@ p {
   margin-left: -4px;
   margin-right: auto;
 }
-.ComposerBody-header h3 input,
-.ComposerBody-header h3 input[disabled],
-.ComposerBody-header h3 input:focus {
-  padding: 0 0 0 20px;
-}
 .ComposerBody-header h3 .icon {
   margin-left: 3px;
   margin-right: auto;
@@ -417,9 +414,6 @@ p {
   }
 }
 @media (min-width: 768px) {
-  .Composer-content {
-    padding: 20px 20px 0;
-  }
   .ComposerBody-avatar {
     float: right;
   }
@@ -453,6 +447,9 @@ p {
   margin-left: 10px;
   margin-right: auto;
 }
+.DiscussionListItem {
+  direction: rtl;
+}
 .DiscussionListItem-author {
   float: right;
 }
@@ -464,7 +461,13 @@ p {
   margin-left: auto;
 }
 .DiscussionListItem-title {
-  margin: 0 auto 3px 0;
+  margin: 0 0 3px 0 !important;
+}
+.DiscussionListItem-info > .item-tags {
+  right: auto !important;
+  left: 80px !important;
+  margin-right: auto !important;
+  margin-left: 4px !important;
 }
 .DiscussionListItem-info .item-terminalPost .icon {
   margin-right: auto;
@@ -476,6 +479,7 @@ p {
 }
 .DiscussionListItem-count {
   float: left;
+  text-align: right !important;
 }
 @media (max-width: 767.98px) {
   .DiscussionListItem-content {
@@ -563,9 +567,8 @@ p {
 }
 @media (min-width: 768px) {
   .DiscussionPage-list {
-    right: calc(-6px - var(--pane-width));
-    left: auto;
-    transition: right 0.2s;
+    right: -406px;
+    transition: right 0.2s !important;
   }
   .paneShowing .DiscussionPage-list {
     right: 0;
@@ -674,7 +677,6 @@ p {
 .PostUser .UserCard {
   left: auto;
   right: -100px;
-  transform-origin: right top;
 }
 .PostUser-badges {
   text-align: left;
@@ -764,6 +766,12 @@ p {
 .PostStream-timeGap {
   padding: 20px 85px 20px 20px;
 }
+.Scrubber .Scrubber-last {
+  margin-top: 8px;
+}
+.Scrubber .Scrubber-first {
+  margin-bottom: 8px;
+}
 .Scrubber a {
   margin-right: -1px;
   margin-left: auto;
@@ -773,9 +781,16 @@ p {
   margin-right: auto;
 }
 .Scrubber-scrollbar {
-  margin: 8px 3px 8px 0;
+  margin: 8px 0 8px 3px;
+}
+.Scrubber-before,
+.Scrubber-after {
+  border-right: 1px solid hsl(212.45901639, 26.8722467%, 93%);
+  border-left: 0;
 }
 .Scrubber-unread {
+  border-right: 1px solid hsl(212.45901639, 26.8722467%, 93%);
+  border-left: 0;
   padding-right: 13px;
   padding-left: 0;
 }
@@ -787,6 +802,11 @@ p {
 .Scrubber-info {
   right: 15px;
   left: auto;
+}
+.Scrubber-info,
+.Scrubber-info strong,
+.Scrubber-info span {
+  text-align: right !important;
 }
 .Settings-account li {
   margin-left: 5px;
@@ -827,7 +847,7 @@ p {
   margin-left: auto;
 }
 .UserCard-badges {
-  margin: 0 15px 0 0;
+  margin: 0 15px 0 0 !important;
 }
 .UserCard-badges,
 .UserCard-badges > li {
@@ -835,7 +855,7 @@ p {
   margin-left: 5px;
 }
 .UserCard-info {
-  margin: 15px auto 0 0;
+  margin: 15px auto 0 0 !important;
 }
 .UserCard-info > li {
   margin-left: 15px;
@@ -843,6 +863,9 @@ p {
 }
 .align-right {
   text-align: right;
+}
+.align-right-imp {
+  text-align: right !important;
 }
 .SelectTagList > li {
   text-align: right;
@@ -874,5 +897,230 @@ p {
 }
 .Modal-header,
 .Modal-header h3 {
+  text-align: right !important;
+}
+.DiscussionHero .TagsLabel .TagLabel.colored {
+  margin-left: 5px;
+  margin-right: auto;
+}
+.TagIcon {
+  margin-right: 1px;
+  margin-left: auto;
+}
+@media (min-width: 768px) {
+  .TagDiscussionModal .Modal-header {
+    padding: 20px 20px 0;
+  }
+  .TagDiscussionModal .Modal-header h3 {
+    text-align: right;
+  }
+}
+.TagDiscussionModal .Modal-footer {
   text-align: right;
+}
+@media (min-width: 768px) and (max-width: 991.98px), (min-width: 992px) and (max-width: 1099.98px), (min-width: 1100px) {
+  .TagDiscussionModal-form-submit {
+    padding-left: 0;
+    padding-right: 15px;
+  }
+}
+.TagsInput-selected .TagsInput-tag {
+  margin-left: 5px;
+  margin-right: auto;
+}
+.TagsInput-selected .TagsInput-tag:last-child {
+  margin-left: 10px;
+  margin-right: auto;
+}
+.SelectTagList > li.child {
+  padding-right: 45px;
+  padding-left: 0;
+}
+.SelectTagList > li .TagIcon {
+  margin-right: 0;
+  margin-left: auto;
+}
+@media (max-width: 767.98px) {
+  .TagTiles {
+    margin: -15px auto 0 -15px;
+  }
+}
+.TagTiles > li {
+  float: right !important;
+}
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .TagTiles > li {
+    float: right;
+  }
+  .TagTiles > li:first-child {
+    border-top-right-radius: 4px;
+    border-top-left-radius: 0;
+  }
+  .TagTiles > li:nth-child(2) {
+    border-top-left-radius: 4px;
+    border-top-right-radius: 0;
+  }
+  .TagTiles > li:nth-last-child(2):nth-child(even),
+  .TagTiles > li:last-child {
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 0;
+  }
+  .TagTiles > li:nth-last-child(2):nth-child(odd),
+  .TagTiles > li:last-child:nth-child(odd) {
+    border-bottom-right-radius: 4px;
+    border-bottom-left-radius: 0;
+  }
+}
+@media (min-width: 992px) {
+  .TagTiles > li {
+    float: right;
+  }
+  .TagTiles > li:first-child {
+    border-top-right-radius: 4px;
+    border-top-left-radius: 0;
+  }
+  .TagTiles > li:nth-child(3),
+  .TagTiles > li:nth-child(2):last-child,
+  .TagTiles > li:first-child:last-child {
+    border-top-left-radius: 4px;
+    border-top-right-radius: 0;
+  }
+  .TagTiles > li:nth-child(3n):nth-last-child(2),
+  .TagTiles > li:nth-child(3n):nth-last-child(3),
+  .TagTiles > li:last-child {
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 0;
+  }
+  .TagTiles > li:nth-child(3n+1):last-child,
+  .TagTiles > li:nth-child(3n+1):nth-last-child(2),
+  .TagTiles > li:nth-child(3n+1):nth-last-child(3) {
+    border-bottom-right-radius: 4px;
+    border-bottom-left-radius: 0;
+  }
+}
+.TagTile-info {
+  padding-left: 20px;
+  padding-right: 0;
+}
+.TagTile-info .icon {
+  float: right;
+  margin-left: 10px;
+  margin-right: auto;
+}
+.TagTile-name {
+  margin: 0 auto 10px 0;
+}
+.TagTile-description {
+  font-size: 12px;
+  margin: 0 auto 10px 0;
+}
+.TagTile-children a {
+  margin-left: 10px;
+  margin-right: auto;
+}
+.TagTile-lastPostedDiscussion-title {
+  margin-left: 10px;
+  margin-right: auto;
+}
+.TagLinkButton.child {
+  margin-right: 10px;
+  margin-left: auto;
+}
+.DiscussionComposer-changeTags {
+  margin-left: 15px;
+  margin-right: auto;
+}
+.DiscussionListItem-info > .item-tags {
+  margin-left: 4px;
+  margin-right: auto;
+}
+@media (min-width: 768px) {
+  .IndexPage .DiscussionListItem-title,
+  .UserPage .DiscussionListItem-title {
+    margin-left: 155px;
+    margin-right: auto;
+  }
+  .IndexPage .DiscussionListItem-info > .item-tags,
+  .UserPage .DiscussionListItem-info > .item-tags {
+    margin-left: 0;
+    margin-right: auto;
+    left: 80px;
+    right: auto;
+  }
+}
+@media (min-width: 992px) {
+  .TagsPage .sideNavOffset {
+    margin: 15px 0 0;
+  }
+}
+.EmojiDropdown > li > button {
+  padding-right: 45px;
+  padding-left: 0;
+}
+.EmojiDropdown > li > button .emoji {
+  float: right;
+  margin-right: -30px;
+  margin-left: auto;
+}
+.Post-header .item-flagged {
+  display: block;
+  margin: 0;
+}
+@media (min-width: 768px) {
+  .Post-flagged {
+    margin-right: -107px;
+    margin-left: auto;
+  }
+}
+.Post-flagged-flags {
+  text-align: right !important;
+}
+@media (min-width: 768px) {
+  .Post-flagged-flags {
+    float: right;
+  }
+}
+.Post-flagged-detail {
+  margin-right: 10px;
+  margin-left: auto;
+}
+@media (min-width: 768px) {
+  .Post-flagged-actions {
+    float: left;
+  }
+}
+.Post-flagged-actions .Button {
+  margin-right: 5px;
+  margin-left: auto;
+}
+.PostLikesModal-list .Avatar {
+  margin-left: 5px;
+  margin-right: auto;
+}
+.PostMention:first-child {
+  margin-right: 0;
+  margin-left: auto;
+}
+.PostMention:before {
+  margin-left: 5px;
+  margin-right: auto;
+}
+.MentionsDropdown .PostPreview .Avatar,
+.PostMention-preview .PostPreview .Avatar,
+.Post-mentionedBy-preview .PostPreview .Avatar {
+  margin: 0 -37px 0 0;
+}
+.MentionsDropdown .PostPreview-content,
+.PostMention-preview .PostPreview-content,
+.Post-mentionedBy-preview .PostPreview-content {
+  padding-right: 37px;
+  padding-left: 0;
+}
+.SubscriptionMenuItem-label {
+  padding-right: 25px;
+  padding-left: 0;
+}
+.SuspendUserModal-days-input input {
+  margin-left: 5px;
+  margin-right: auto;
 }

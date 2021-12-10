@@ -12,5 +12,6 @@ use Flarum\Extend;
 
 return [
     (new Extend\Frontend('forum'))
-        ->css(__DIR__ . '/source/less/forum.less'),
+        ->js(__DIR__ . '/js/dist/forum.js')
+        ->css(__DIR__ . '/less/forum.less')
 ];

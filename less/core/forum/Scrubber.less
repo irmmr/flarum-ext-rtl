@@ -1,4 +1,14 @@
+@control-bg-e: hsl(212.45901639, 26.8722467%, 93%);
+
 .Scrubber {
+  .Scrubber-last {
+    margin-top: 8px;
+  }
+
+  .Scrubber-first {
+    margin-bottom: 8px;
+  }
+
   & a {
     margin-right: -1px;
     margin-left: auto;
@@ -10,15 +20,15 @@
   }
 }
 .Scrubber-scrollbar {
-  margin: 8px 3px 8px 0;
+  margin: 8px 0 8px 3px;
 }
 .Scrubber-before, .Scrubber-after {
-  //border-right: 1px solid var(--control-bg);
-  //border-left: 0;
+  border-right: 1px solid @control-bg-e;
+  border-left: 0;
 }
 .Scrubber-unread {
-  //border-right: 1px solid var(--muted-color-light);
-  //border-left: 0;
+  border-right: 1px solid @control-bg-e;
+  border-left: 0;
   padding-right: 13px;
   padding-left: 0;
 }
@@ -30,4 +40,8 @@
 .Scrubber-info {
   right: 15px;
   left: auto;
+
+  &, strong, span {
+    text-align: right !important;
+  }
 }

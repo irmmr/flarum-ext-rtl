@@ -1,8 +1,8 @@
 {
-  "name": "irmmr/flarum-rtl-ext",
+  "name": "irmmr/flarum-ext-rtl",
   "type": "flarum-extension",
   "keywords": ["RTL", "flarum-rtl", "flarum"],
-  "description": "Flarum rtl support extension.",
+  "description": "Flarum rtl support.",
   "minimum-stability": "stable",
   "license": "MIT",
   "authors": [

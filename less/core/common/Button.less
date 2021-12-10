@@ -10,22 +10,16 @@
     &:first-child:not(:last-child):not(.Dropdown-toggle) {
       margin-right: 0;
       margin-left: auto;
-      border-top-right-radius: 0;
-      border-bottom-right-radius: 0;
-      border-top-left-radius: 0;
-      border-bottom-left-radius: 0;
+      border-radius: 0 3px 3px 0;
     }
     &:last-child:not(:first-child), &.Dropdown-toggle:not(:first-child) {
-      border-top-left-radius: 0;
-      border-bottom-left-radius: 0;
-      border-top-right-radius: 0;
-      border-bottom-right-radius: 0;
+      border-radius: 3px 0 0 3px;
     }
   }
 
   .Button + .Button {
-    margin-left: auto;
-    margin-right: 1px;
+    margin-left: auto !important;
+    margin-right: 0;
   }
 }
 
@@ -35,7 +29,7 @@
 
 .Button {
   .Button-label {
-    transition: margin-left 0.1s;
+    //transition: margin-right 0.1s;
   }
   .LoadingIndicator-container {
     margin-right: 4px;
@@ -43,15 +37,6 @@
   }
 }
 
-.Button--square {
-  padding-right: 9px;
-  padding-left: 9px;
-}
-
-.Button--primary {
-  padding-right: 20px;
-  padding-left: 20px;
-}
 .SessionDropdown .Dropdown-toggle {
   .Avatar {
     margin: -2px -6px -2px 5px;

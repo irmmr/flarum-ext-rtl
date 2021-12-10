@@ -1,3 +1,6 @@
+// --pane-width
+// right: calc(~"-6px - var(--pane-width)");
+
 @media @tablet-up {
   .DiscussionPage-nav {
     float: left;
@@ -13,9 +16,8 @@
 
 @media @tablet-up {
   .DiscussionPage-list {
-    right: calc(~"-6px - var(--pane-width)");
-    left: auto;
-    transition: right 0.2s;
+    right: -406px;
+    transition: right 0.2s !important;
 
     .paneShowing & {
       right: 0;
