@@ -23,13 +23,13 @@ composer update irmmr/flarum-ext-rtl
 ## Supported packages
 The following includes all items that are aligned correctly. These are important because different versions of extensions or core may change user interfaces and styles.
 
-- `flarum/core` **v1.1.1**
-- `flarum/emoji` **v1.1.1**
-- `flarum/flags` **v1.1.0**
-- `flarum/likes` **v1.1.0**
-- `flarum/mentions` **v1.1.3**
-- `flarum/subscriptions` **v1.1.0**
-- `flarum/suspend` **v1.1.0**
-- `flarum/tags` **v1.1.0**
+- [`flarum/core`](https://github.com/flarum/core) **v1.1.1**
+- [`flarum/emoji`](https://github.com/flarum/emoji) **v1.1.1**
+- [`flarum/flags`](https://github.com/flarum/flags) **v1.1.0**
+- [`flarum/likes`](https://github.com/flarum/likes) **v1.1.0**
+- [`flarum/mentions`](https://github.com/flarum/mentions) **v1.1.3**
+- [`flarum/subscriptions`](https://github.com/flarum/subscriptions) **v1.1.0**
+- [`flarum/suspend`](https://github.com/flarum/suspend) **v1.1.0**
+- [`flarum/tags`](https://github.com/flarum/tags) **v1.1.0**
 
 [//]: # (### Extensions)
