@@ -1,6 +1,6 @@
 <?php
 /*
- * This file is part of Flarum Profile Cover.
+ * This file is part of Flarum RTL support extension.
  *
  * (c)  Irmmr <irmmr.ir@gmail.com>
  *
