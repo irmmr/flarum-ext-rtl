@@ -3,6 +3,7 @@
     <img src="https://img.shields.io/badge/flarum%2Fcore-%5Ev1.1.1-blue?style=flat-square">
     <img src="https://iili.io/7jvWrb.png">
 </p>
+<hr>
 
 <center><h4>Flarum RTL extension</h4></center>
 
