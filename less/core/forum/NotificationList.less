@@ -12,9 +12,14 @@
 }
 
 .NotificationGroup {
+  &, &-content, &-header {
+    text-align: right !important;
+  }
+
   &-badges {
     --overlap: 13px;
 
+    // TODO: change margin-left:auto and margin-right:0 for better showing
     margin-left: 8px;
     padding-left: var(--overlap);
     margin-right: auto;
@@ -28,6 +33,12 @@
 }
 
 .Notification {
+
+  &-title-spring {
+    margin-right: auto !important;
+    margin-left: 0 !important;
+  }
+
   &-content {
     margin-left: 8px;
     margin-right: auto;
