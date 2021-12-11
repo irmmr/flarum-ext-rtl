@@ -1,6 +1,10 @@
 <p align="center">
-    <img src="https://img.shields.io/packagist/v/irmmr/flarum-ext-rtl?style=flat-square">
-    <img src="https://img.shields.io/badge/flarum%2Fcore-%5Ev1.1.1-blue?style=flat-square">
+    <a href="https://packagist.org/packages/irmmr/flarum-ext-rtl" target="_blank">
+        <img src="https://img.shields.io/packagist/v/irmmr/flarum-ext-rtl?style=flat-square">
+    </a>
+    <a href="https://github.com/flarum/core" target="_blank">
+        <img src="https://img.shields.io/badge/flarum%2Fcore-%5Ev1.1.1-blue?style=flat-square">
+    </a>
     <img src="https://iili.io/7jvWrb.png">
 </p>
 <hr>
