@@ -32,4 +32,9 @@ The following includes all items that are aligned correctly. These are important
 - [`flarum/suspend`](https://github.com/flarum/suspend) **v1.1.0**
 - [`flarum/tags`](https://github.com/flarum/tags) **v1.1.0**
 
-[//]: # (### Extensions)
+### Extensions
+- [`fof/best-answer`](https://github.com/FriendsOfFlarum/best-answer) **v1.1.7**
+- [`fof/nightmode`](https://github.com/FriendsOfFlarum/nightmode) **v1.1.4**
+- [`fof/oauth`](https://github.com/FriendsOfFlarum/oauth) **v1.1.1**
+- [`fof/reactions`](https://github.com/FriendsOfFlarum/reactions) **v1.0.2**
+- [`fof/user-bio`](https://github.com/FriendsOfFlarum/user-bio) **v1.0.1**
