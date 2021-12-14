@@ -1,11 +1,11 @@
 .Checkbox--switch {
-  --left-pad: 65px;
+  //--left-pad: 65px;
 
-  padding-right: var(--left-pad);
+  padding-right: 65px;
 
   .Checkbox-display {
     float: right;
-    margin-right: calc(~"0px - var(--left-pad)");
+    margin-right: -65px; /*calc(~"0px - 65px")*/
     margin-left: auto;
   }
 }

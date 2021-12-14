@@ -1,5 +1,5 @@
 .tooltip {
-  --tooltip-arrow-width: @tooltip-arrow-width;
+  //--tooltip-arrow-width: @tooltip-arrow-width;
 
   &.right  {margin-right:  3px; margin-left: auto;}
   &.left   {margin-right: -3px; margin-left: auto;}
@@ -12,7 +12,7 @@
   &.top .tooltip-arrow {
     right: 50%;
     left: auto;
-    margin-right: calc(~"0px - var(--tooltip-arrow-width)");
+    margin-right: -@tooltip-arrow-width; /*calc(~"0px - var(--tooltip-arrow-width)")*/
     margin-left: auto;
   }
   &.right .tooltip-arrow {
@@ -26,7 +26,7 @@
   &.bottom .tooltip-arrow {
     right: 50%;
     left: auto;
-    margin-right: calc(~"0px - var(--tooltip-arrow-width)");
+    margin-right: -@tooltip-arrow-width; /* calc(~"0px - var(--tooltip-arrow-width)") */
     margin-left: auto;
   }
 }

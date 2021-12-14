@@ -32,7 +32,7 @@
   .ComposerBody-header {
     > li {
       .normal &:first-child {
-        margin: calc(~"0px - var(--header-height-phone)") auto 0 50px;
+        margin: -@header-height-phone auto 0 50px; /* calc(~"0px - var(--header-height-phone)") */
       }
     }
   }
@@ -71,6 +71,6 @@
 @media @desktop-hd {
   .hasPane.panePinned .App-composer {
     left: auto;
-    right: var(--pane-width);
+    right: @pane-width;
   }
 }
