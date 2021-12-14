@@ -28,6 +28,11 @@
 // --------------------------------------------------
 
 .Button {
+  @media @phone {
+    &.Button--icon {
+      padding-right: 0 !important;
+    }
+  }
   .Button-label {
     //transition: margin-right 0.1s;
   }
