@@ -1,11 +1,14 @@
 .TagTiles {
   @media @phone {
-    margin: -15px auto 0 -15px;
+    margin: -15px -15px 0; // unchanged
   }
 
   > li {
-    float: right !important;
+    float: right;
 
+    @media @phone {
+      float: none;
+    }
     @media @tablet {
       float: right;
       &:first-child {
