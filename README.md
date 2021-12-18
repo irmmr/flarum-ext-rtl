@@ -19,6 +19,10 @@ Installation is like all flarum extensions.
 ```
 composer require irmmr/flarum-ext-rtl
 ```
+You can also use the latest changes.
+```
+composer require irmmr/flarum-ext-rtl:dev-main
+```
 
 ### Update
 ```
