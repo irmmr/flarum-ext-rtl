@@ -47,3 +47,4 @@ The following includes all items that are aligned correctly. These are important
 - [`fof/oauth`](https://github.com/FriendsOfFlarum/oauth) **v1.1.1**
 - [`fof/reactions`](https://github.com/FriendsOfFlarum/reactions) **v1.0.2**
 - [`fof/user-bio`](https://github.com/FriendsOfFlarum/user-bio) **v1.0.1**
+- [`ianm/level-ranks`](https://github.com/imorland/level-ranks) **v1.0.0**
