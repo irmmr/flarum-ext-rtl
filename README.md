@@ -54,3 +54,5 @@ The following includes all items that are aligned correctly. These are important
 - [`clarkwinkelmann/flarum-ext-author-change`](https://github.com/clarkwinkelmann/flarum-ext-author-change) **v1.0.2**
 - [`ramesh-dada/bbcode-alerts`](https://github.com/ramesh-dada/bbcode-alerts) **v6.21**
 - [`datlechin/flarum-birthdays`](https://github.com/datlechin/flarum-birthdays) **v1.2.3**
+- [`v17development/flarum-blog`](https://github.com/v17development/flarum-blog) **v0.6.1**
+- [`eddiewebb/flarum-calendar`](https://github.com/eddiewebb/flarum-calendar) **v1.0.3**
