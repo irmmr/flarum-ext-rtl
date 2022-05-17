@@ -59,3 +59,5 @@ The following includes all items that are aligned correctly. These are important
 - [`the-turk/flarum-diff`](https://github.com/the-turk/flarum-diff) **v1.1.1**
 - [`fof/byobu`](https://github.com/FriendsOfFlarum/byobu) **v1.1.6**
 - [`fof/merge-discussions`](https://github.com/FriendsOfFlarum/merge-discussions) **v1.2.3**
+- [`fof/polls`](https://github.com/FriendsOfFlarum/polls) **v1.0.5**
+
