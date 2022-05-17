@@ -56,3 +56,4 @@ The following includes all items that are aligned correctly. These are important
 - [`datlechin/flarum-birthdays`](https://github.com/datlechin/flarum-birthdays) **v1.2.3**
 - [`v17development/flarum-blog`](https://github.com/v17development/flarum-blog) **v0.6.1**
 - [`eddiewebb/flarum-calendar`](https://github.com/eddiewebb/flarum-calendar) **v1.0.3**
+- [`the-turk/flarum-diff`](https://github.com/the-turk/flarum-diff) **v1.1.1**
