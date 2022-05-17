@@ -60,4 +60,4 @@ The following includes all items that are aligned correctly. These are important
 - [`fof/byobu`](https://github.com/FriendsOfFlarum/byobu) **v1.1.6**
 - [`fof/merge-discussions`](https://github.com/FriendsOfFlarum/merge-discussions) **v1.2.3**
 - [`fof/polls`](https://github.com/FriendsOfFlarum/polls) **v1.0.5**
-
+- [`fof/prevent-necrobumping`](https://github.com/FriendsOfFlarum/prevent-necrobumping) **v1.0.1**
