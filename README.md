@@ -57,3 +57,4 @@ The following includes all items that are aligned correctly. These are important
 - [`v17development/flarum-blog`](https://github.com/v17development/flarum-blog) **v0.6.1**
 - [`eddiewebb/flarum-calendar`](https://github.com/eddiewebb/flarum-calendar) **v1.0.3**
 - [`the-turk/flarum-diff`](https://github.com/the-turk/flarum-diff) **v1.1.1**
+- [`fof/byobu`](https://github.com/FriendsOfFlarum/byobu) **v1.1.6**
