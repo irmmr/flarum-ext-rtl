@@ -24,6 +24,9 @@
         &:last-of-type {
             border-radius: @border-radius 0 0 @border-radius !important;
         }
+        &:first-of-type:last-of-type {
+            border-radius: @border-radius !important;
+        }
 
         &:not(:first-of-type) {
             margin-right: -1px !important;
