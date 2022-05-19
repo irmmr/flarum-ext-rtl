@@ -12,6 +12,10 @@
           margin-right: 0 !important;
           margin-left: 5px !important;
         }
+
+        .Avatar {
+          margin-right: unset !important;
+        }
       }
     }
 }
@@ -21,9 +25,9 @@
     .Modal-header {
       text-align: right !important;
 
-      .Avatar {
-        margin: -2px -6px -2px 5px !important;
-      }
+      // .Avatar {        // removed cause of error in avatar position
+      //   margin: -2px -6px -2px 5px !important;
+      // }
     }
   
     @media @tablet-up {
@@ -38,7 +42,7 @@
       .Modal-header {
         .Avatar {
           margin-right: 6px !important;
-          margin-left: auto !important;
+          margin-left: 6px !important; // first-check: auto
         }
       }
     }
