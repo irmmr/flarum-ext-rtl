@@ -1,28 +1,44 @@
+.Post-header {
+  & > ul > li.item-isBestAnswer {
+    margin-left: 60px;
+    margin-right: auto;
+  }
+}
+
 .Post-footer {
   .item-bestAnswerPost {
+    padding: 10px 10px 0 10px;
+
     .Post--BestAnswer {
-      margin-left: 0 !important;
-      margin-right: auto !important;
+      margin-left: 0;
+      margin-right: auto;
     }
+  }
+}
+
+.UserCard-bestAnswerCount {
+  .icon {
+    margin-left: 5px;
+    margin-right: auto;
   }
 }
 
 .Post--BestAnswer {
   .icon {
-    margin-left: 5px !important;
-    margin-right: auto !important;
+    margin-left: 5px;
+    margin-right: auto;
   }
 }
 
 @media @desktop-up {
   .item-isBestAnswer {
-    float: left !important;
+    float: left;
   }
 
   .Post--BestAnswer {
     .BestAnswer--User {
-      margin-right: 7.5px !important;
-      margin-left: auto !important;
+      margin-right: 7.5px;
+      margin-left: auto;
     }
   }
 }
