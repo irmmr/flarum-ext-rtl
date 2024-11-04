@@ -49,7 +49,7 @@ class AddStyles
     public function __invoke(Document $document, ServerRequestInterface $request)
     {
         foreach ($this->styles as $style) {
-            $document->head[] = $style;
+            $document->head[] = "<style>{$style}</style>";
         }
     }
 }
