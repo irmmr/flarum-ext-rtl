@@ -38,7 +38,7 @@ composer update irmmr/flarum-ext-rtl
 
 The following includes all items that are aligned correctly. These are important because different versions of extensions or core may change user interfaces and styles.
 
-- [`flarum/core`](https://github.com/flarum/core) **v1.5.0**
+- [`flarum/core`](https://github.com/flarum/core) **v1.8.8**
 - [`flarum/emoji`](https://github.com/flarum/emoji) **v1.5.0**
 - [`flarum/flags`](https://github.com/flarum/flags) **v1.5.0**
 - [`flarum/likes`](https://github.com/flarum/likes) **v1.5.0**
