@@ -7,20 +7,20 @@
 .FoFGamification-voters {
   &-title {
     @media @phone {
-      margin-left: 8px;
-      margin-right: unset;
+      margin-left: 8px !important;
+      margin-right: unset !important;
     }
 
     &-label {
-      padding-right: 4px;
-      padding-left: unset;
+      padding-right: 4px !important;
+      padding-left: unset !important;
     }
   }
 
   &-item {
     @media @phone {
-      margin-right: 4px;
-      margin-left: unset;
+      margin-right: 4px !important;
+      margin-left: unset !important;
     }
   }
 }
@@ -28,39 +28,39 @@
 // alternateLayout.less
 .CommentPost.votesAlternativeLayout {
   .Post-header {
-    margin-left: 36px;
-    margin-right: unset;
+    margin-left: 36px !important;
+    margin-right: unset !important;
   }
 }
 
 .DiscussionListItem-votes.alternateLayout {
   + .DiscussionListItem-author {
-    margin-left: 12px;
-    margin-right: -2px;
+    margin-left: 12px !important;
+    margin-right: -2px !important;
   }
 
   + .DiscussionListItem-main {
     @media @phone {
-      padding-left: 28px;
-      padding-right: unset;
+      padding-left: 28px !important;
+      padding-right: unset !important;
     }
   }
 }
 
 .DiscussionListItem-votes.alternateLayout,
 .Post-votes {
-  right: 0;
-  left: auto;
+  right: 0 !important;
+  left: auto !important;
 
   .LoadingIndicator-container {
-    right: 50%;
-    left: auto;
+    right: 50% !important;
+    left: auto !important;
   }
 
   button {
     .icon {
-      margin-left: 0;
-      margin-right: unset;
+      margin-left: 0 !important;
+      margin-right: unset !important;
     }
   }
 }
@@ -69,15 +69,15 @@
 
 .DiscussionListItem-votes.alternateLayout {
   @media (max-width: @screen-tablet-under) {
-    right: 8px;
-    left: auto;
+    right: 8px !important;
+    left: auto !important;
   }
 }
 
 .Post-votes {
   @media (max-width: @screen-tablet-under) {
-    right: 0;
-    left: auto;
+    right: 0 !important;
+    left: auto !important;
   }
 }
 
@@ -85,15 +85,15 @@
   @media @tablet-up {
     right: 34px !important;
     left: auto !important;
-    margin-left: 0;
-    margin-right: unset;
+    margin-left: 0 !important;
+    margin-right: unset !important;
   }
 
   @screen-tablet-under: @screen-tablet - 0.01px;
 
   @media (max-width: @screen-tablet-under) {
-    left: 4px;
-    right: auto;
+    left: 4px !important;
+    right: auto !important;
   }
 }
 
@@ -101,18 +101,18 @@
   &.panePinned,
   &.paneShowing {
     .DiscussionListItem-votes.alternateLayout {
-      right: 6px;
-      left: auto;
+      right: 6px !important;
+      left: auto !important;
     }
   }
 }
 
 .CommentPost .Post-actions {
-  text-align: left; // original: right
+  text-align: left !important; // original: right
 
   .CommentPost-votes.alternateLayout {
-    right: 0;
-    left: auto;
+    right: 0 !important;
+    left: auto !important;
   }
 }
 
@@ -125,65 +125,65 @@
 }
 
 .item-discussion-votes {
-  margin-right: 5px;
-  margin-left: unset;
-  left: 80px;
-  right: auto;
+  margin-right: 5px !important;
+  margin-left: unset !important;
+  left: 80px !important;
+  right: auto !important;
 
   .icon {
-    margin-left: 8px;
-    margin-right: auto;
+    margin-left: 8px !important;
+    margin-right: auto !important;
   }
 
   @media @phone {
-    left: 50px;
-    right: auto;
+    left: 50px !important;
+    right: auto !important;
   }
 }
 
 @media @phone {
   .DiscussionListItem--withVotes .DiscussionListItem-title {
-    padding-left: 48px;
-    padding-right: unset;
+    padding-left: 48px !important;
+    padding-right: unset !important;
   }
 }
 
 .VotesModal-list {
   .Avatar {
-    margin-left: 5px;
-    margin-right: unset;
+    margin-left: 5px !important;
+    margin-right: unset !important;
   }
 }
 
 .CommentPost-votes {
   .Post-points {
-    margin-left: 0.5em;
-    margin-right: unset;
+    margin-left: 0.5em !important;
+    margin-right: unset !important;
   }
 }
 
 .Post-Rank {
-  margin-right: 10px;
-  margin-left: unset;
+  margin-right: 10px !important;
+  margin-left: unset !important;
 }
 
 .User-Rank {
-  margin-right: 11px;
-  margin-left: unset;
+  margin-right: 11px !important;
+  margin-left: unset !important;
 }
 
 .rankings {
   &-info {
-    padding-right: 38.6%;
-    padding-left: unset;
+    padding-right: 38.6% !important;
+    padding-left: unset !important;
   }
 }
 
 .UserCard {
   .item-points {
     .icon {
-      margin-left: 5px;
-      margin-right: auto;
+      margin-left: 5px !important;
+      margin-right: auto !important;
     }
   }
 }
