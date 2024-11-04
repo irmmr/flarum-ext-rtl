@@ -49,6 +49,7 @@ The following includes all items that are aligned correctly. These are important
 
 ### Extensions
 
+- [`fof/gamification`](https://github.com/FriendsOfFlarum/gamification) **v1.6.7**
 - [`fof/best-answer`](https://github.com/FriendsOfFlarum/best-answer) **v1.2.4**
 - [`fof/nightmode`](https://github.com/FriendsOfFlarum/nightmode) **v1.5.0**
 - [`fof/oauth`](https://github.com/FriendsOfFlarum/oauth) **v1.2.5**
