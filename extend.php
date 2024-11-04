@@ -9,9 +9,11 @@
  */
 
 use Flarum\Extend;
+use Irmmr\FlarumRtlSupport\Content\AddStyles;
 
 return [
     (new Extend\Frontend('forum'))
         ->js(__DIR__ . '/js/dist/forum.js')
         ->css(__DIR__ . '/less/forum.less')
+        ->content(AddStyles::class)
 ];

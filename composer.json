@@ -13,6 +13,11 @@
   "require": {
     "flarum/core": "^v1.1.1"
   },
+  "autoload": {
+    "psr-4": {
+        "Irmmr\\FlarumRtlSupport\\": "src/"
+    }
+  },
   "extra": {
     "branch-alias": {
       "dev-master": "1.x.x-dev"
