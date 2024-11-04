@@ -2,3 +2,188 @@
 .CommentPost-votes {
   direction: ltr !important;
 }
+
+// VotesBox.less
+.FoFGamification-voters {
+  &-title {
+    @media @phone {
+      margin-left: 8px;
+      margin-right: unset;
+    }
+
+    &-label {
+      padding-right: 4px;
+      padding-left: unset;
+    }
+  }
+
+  &-item {
+    @media @phone {
+      margin-right: 4px;
+      margin-left: unset;
+    }
+  }
+}
+
+// alternateLayout.less
+.CommentPost.votesAlternativeLayout {
+  .Post-header {
+    margin-left: 36px;
+    margin-right: unset;
+  }
+}
+
+.DiscussionListItem-votes.alternateLayout {
+  + .DiscussionListItem-author {
+    margin-left: 12px;
+    margin-right: -2px;
+  }
+
+  + .DiscussionListItem-main {
+    @media @phone {
+      padding-left: 28px;
+      padding-right: unset;
+    }
+  }
+}
+
+.DiscussionListItem-votes.alternateLayout,
+.Post-votes {
+  right: 0;
+  left: auto;
+
+  .LoadingIndicator-container {
+    right: 50%;
+    left: auto;
+  }
+
+  button {
+    .icon {
+      margin-left: 0;
+      margin-right: unset;
+    }
+  }
+}
+
+@screen-tablet-under: @screen-tablet - 0.01px;
+
+.DiscussionListItem-votes.alternateLayout {
+  @media (max-width: @screen-tablet-under) {
+    right: 8px;
+    left: auto;
+  }
+}
+
+.Post-votes {
+  @media (max-width: @screen-tablet-under) {
+    right: 0;
+    left: auto;
+  }
+}
+
+.Post-header .item-votes {
+  @media @tablet-up {
+    right: 34px !important;
+    left: auto !important;
+    margin-left: 0;
+    margin-right: unset;
+  }
+
+  @screen-tablet-under: @screen-tablet - 0.01px;
+
+  @media (max-width: @screen-tablet-under) {
+    left: 4px;
+    right: auto;
+  }
+}
+
+.hasPane {
+  &.panePinned,
+  &.paneShowing {
+    .DiscussionListItem-votes.alternateLayout {
+      right: 6px;
+      left: auto;
+    }
+  }
+}
+
+.CommentPost .Post-actions {
+  text-align: left; // original: right
+
+  .CommentPost-votes.alternateLayout {
+    right: 0;
+    left: auto;
+  }
+}
+
+// Core
+@media (min-width: 768px) {
+  .DiscussionListItem-info .item-discussion-votes + .item-tags {
+    left: 122px !important;
+    right: auto !important;
+  }
+}
+
+.item-discussion-votes {
+  margin-right: 5px;
+  margin-left: unset;
+  left: 80px;
+  right: auto;
+
+  .icon {
+    margin-left: 8px;
+    margin-right: auto;
+  }
+
+  @media @phone {
+    left: 50px;
+    right: auto;
+  }
+}
+
+@media @phone {
+  .DiscussionListItem--withVotes .DiscussionListItem-title {
+    padding-left: 48px;
+    padding-right: unset;
+  }
+}
+
+.VotesModal-list {
+  .Avatar {
+    margin-left: 5px;
+    margin-right: unset;
+  }
+}
+
+.CommentPost-votes {
+  .Post-points {
+    margin-left: 0.5em;
+    margin-right: unset;
+  }
+}
+
+.Post-Rank {
+  margin-right: 10px;
+  margin-left: unset;
+}
+
+.User-Rank {
+  margin-right: 11px;
+  margin-left: unset;
+}
+
+.rankings {
+  &-info {
+    padding-right: 38.6%;
+    padding-left: unset;
+  }
+}
+
+.UserCard {
+  .item-points {
+    .icon {
+      margin-left: 5px;
+      margin-right: auto;
+    }
+  }
+}
