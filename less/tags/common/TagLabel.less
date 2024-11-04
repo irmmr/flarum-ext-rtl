@@ -1,13 +1,21 @@
 .TagsLabel {
   .TagLabel {
+    &-icon {
+      margin-left: 3px;
+      margin-right: unset;
+    }
+
     &:first-child {
       border-radius: 0 @border-radius @border-radius 0 !important;
     }
+
     &:last-child {
       border-radius: @border-radius 0 0 @border-radius !important;
     }
+
     &:first-child:last-child {
       border-radius: @border-radius !important;
     }
+
   }
 }
