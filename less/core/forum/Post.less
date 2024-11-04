@@ -5,9 +5,15 @@
 .Post-header {
   > ul {
     > li {
-      margin-right: unset;
       margin-left: 10px;
+      margin-right: auto;
     }
+  }
+}
+.PostUser {
+  .UserOnline {
+    margin-left: 5px;
+    margin-right: auto;
   }
 
   .UserCard {
@@ -15,27 +21,20 @@
     right: -100px;
     //transform-origin: right top;
   }
-
-  .Avatar {
-    margin-right: unset;
-    margin-left: 5px;
-  }
-}
-.PostUser {
-  .UserOnline {
-    margin-left: 5px;
-    margin-right: unset;
-  }
 }
 .PostUser-badges {
-  text-align: left !important;
+  text-align: left; // original: right
+
+  .Badge {
+    margin-right: -10px;
+    margin-left: auto;
+  }
 }
 
 .PostMeta-time, .PostMeta-ip {
   margin-right: 5px;
-  margin-left: unset;
+  margin-left: auto;
 }
-
 .EventPost-icon {
   float: right;
 }
@@ -43,7 +42,7 @@
 .Post-footer {
   .icon {
     margin-left: 5px;
-    margin-right: unset;
+    margin-right: auto;
   }
 }
 .Post-actions {
@@ -51,68 +50,76 @@
 
   > ul {
     > li {
-      margin-right: -5px;
       margin-left: 0;
+      margin-right: -5px;
     }
   }
 }
 
 .PostPreview {
+  padding-left: 0;
   padding-right: 50px;
-  padding-left: unset;
 
-  &-badge, .Avatar {
+  .Avatar {
     float: right;
     margin-right: -50px;
-    margin-left: unset;
+    margin-left: auto;
   }
-
   .username {
     margin-left: 5px;
-    margin-right: unset;
+    margin-right: auto;
   }
-
   time {
     margin-left: 5px;
-    margin-right: unset;
+    margin-right: auto;
   }
 }
 
 @media @phone {
+  .Post-header {
+    .Avatar {
+      margin-left: 5px;
+      margin-right: auto;
+    }
+  }
   .PostUser-badges {
+    left: auto;
     right: 6px;
-    left: unset;
 
     .Badge {
       margin-right: -13px;
-      margin-left: unset;
+      margin-left: auto;
     }
   }
   .EventPost {
     padding-right: 50px;
-    padding-left: unset;
+    padding-left: 0;
   }
   .EventPost-icon {
     margin-right: -30px;
-    margin-left: unset;
+    margin-left: auto;
   }
 }
+
+@avatar-column-width: 85px;
 
 @media @tablet-up {
+  .Post {
+    padding-right: 20px + @avatar-column-width;
+    padding-left: 0;
+  }
+  .PostUser-avatar {
+    right: -@avatar-column-width;
+    left: auto;
+  }
   .PostUser-badges {
     float: right;
-    position: relative;
-    margin-right: calc(~"5px - var(--avatar-column-width)");
-    margin-left: unset;
+    margin-right: -@avatar-column-width + 5px;
+    margin-left: auto;
   }
   .EventPost-icon {
-    text-align: left;
+    text-align: left; // original: right
+    margin-right: -@avatar-column-width;
+    margin-left: auto;
   }
-}
-
-.ReplyPlaceholder {
-  margin-right: calc(0px - var(--post-padding));
-  margin-left: unset;
-  padding-right: var(--post-padding);
-  padding-left: unset;
 }
