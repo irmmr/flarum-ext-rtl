@@ -11,12 +11,16 @@
     }
   ],
   "require": {
-    "flarum/core": "^v1.1.1"
+    "flarum/core": "^v1.1.1",
+    "sabberworm/php-css-parser": "^8.7"
   },
   "autoload": {
     "psr-4": {
         "Irmmr\\FlarumRtlSupport\\": "src/"
-    }
+    },
+    "files": [
+      "src/Overrides/Frontend/Compiler/LessCompiler.php"
+    ]
   },
   "extra": {
     "branch-alias": {

@@ -9,11 +9,23 @@
  */
 
 use Flarum\Extend;
-use Irmmr\FlarumRtlSupport\Content\AddStyles;
+use Irmmr\FlarumRtlSupport\Frontend\Content;
 
 return [
     (new Extend\Frontend('forum'))
         ->js(__DIR__ . '/js/dist/forum.js')
-        ->css(__DIR__ . '/less/forum.less')
-        ->content(AddStyles::class)
+        ->content(Content\ForumContent::class)
+        ->css(__DIR__ . '/less/forum.less'),
+
+    (new Extend\Frontend('admin'))
+        ->js(__DIR__ . '/js/dist/admin.js')
+        ->content(Content\AdminContent::class)
+        ->css(__DIR__ . '/less/admin.less'),
+
+    new Extend\Locales(__DIR__ . '/locale'),
+
+    (new Extend\Settings())
+        ->default('irmmr-rtl.lang_base', true)
+        ->default('irmmr-rtl.ad_status', true)
+        ->default('irmmr-rtl.fm_status', true)
 ];
