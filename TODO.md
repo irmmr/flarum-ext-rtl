@@ -1,2 +1,3 @@
-- `ext:best-answer (m)` ~~Set text align to right~~
-- `flarum:tags (m)` ~~Fix display style problem~~
+#### `src/Traits/CompileTrait::make_head_rtl`
+
+- It may mistakenly change non-CSS files.
