@@ -1,5 +1,9 @@
 // helper less for make direction rtl
 
-//html[dir="rtl"] {
-//    *
-//}
+html[dir="rtl"] {
+    @media @phone {
+        .App-drawer {
+            transform: translateX(calc(~"-6px + var(--drawer-width)")) !important;
+        }
+    }
+}
