@@ -18,6 +18,7 @@ use Less_Parser;
 use Less_Tree_Import;
 use Sabberworm\CSS\Parser;
 use Sabberworm\CSS\Parsing\SourceException;
+use MatthiasMullie\Minify;
 
 /**
  * @internal
@@ -77,7 +78,7 @@ class LessCompiler extends RevisionCompiler
         ini_set('xdebug.max_nesting_level', '200');
 
         $parser = new Less_Parser([
-            'compress' => true,
+            'compress' => false, // disable compress for save css comments
             'cache_dir' => $this->cacheDir,
             'import_dirs' => $this->importDirs,
             'import_callback' => $this->lessImportOverrides ? $this->overrideImports($sources) : null,
@@ -103,6 +104,32 @@ class LessCompiler extends RevisionCompiler
     }
 
     /**
+     * +++
+     * minify css file
+     *
+     * @private
+     *
+     * @param   string  $css
+     * @return  string  minified
+     */
+    protected function css_code_minify(string $css): string
+    {
+        $minifier = new Minify\CSS;
+
+        // add plain css code
+        $minifier->add($css);
+        $minify = $minifier->minify();
+
+        if (empty($minify)) {
+            return $css;
+        }
+
+        $time = date('Y/m/d H:i:s');
+
+        return "/* minified at {$time} */" . PHP_EOL . $minify;
+    }
+
+    /**
      * save compiled less file + generated rtl
      * file.less -> file.css + file.rtl.css
      */
@@ -119,8 +146,8 @@ class LessCompiler extends RevisionCompiler
             return false;
         }
 
-        // add main css file
-        if (!$this->assetsDir->put($file, $css_content)) {
+        // add main css file + minify
+        if (!$this->assetsDir->put($file, $this->css_code_minify($css_content))) {
             return false;
         }
 
@@ -155,7 +182,7 @@ class LessCompiler extends RevisionCompiler
         }
 
         // apply rtl file
-        return $this->assetsDir->put($rtl_file, $css_tree->render());
+        return $this->assetsDir->put($rtl_file, $this->css_code_minify($css_tree->render()));
     }
 
     protected function finalize(string $parsedCss): string
