@@ -37,3 +37,108 @@ composer update irmmr/flarum-ext-rtl
 ```
 
 This plugin adds an RTL version alongside all compiled CSS files. While using this method has many advantages, it can also come with some issues. If you encounter a serious problem while using this plugin, you can visit the `issue` section.
+
+### Commands
+
+With a series of commands, you can control the generated codes for RTL (right-to-left). Essentially, each selector accepts a set of commands. Due to the lack of support for all types of comments in "sabberworm/php-css-parser," it is not possible to use commands as before.
+
+#### ignore
+
+With the "ignore" command, you can make it so that your desired selector does not change at all.
+
+```css
+b { margin-right: 5px; }
+
+/*rtl:ignore*/
+a {
+    float: left;
+    color: red;
+}
+```
+Output:
+```css
+b {margin-left: 5px;}
+a {float: left;color: red;}
+```
+
+#### remove
+
+The selector can be generally removed in the RTL version.
+
+```css
+b { margin-right: 5px; }
+
+/*rtl:remove*/
+a {
+    float: left;
+    color: red;
+}
+```
+Output:
+```css
+b {margin-left: 5px;}
+```
+
+#### rename
+
+You can change a selector in the RTL version.
+
+```css
+b { margin-right: 5px; }
+
+/*rtl:rename:ul li*/
+a {
+    float: left;
+    color: red;
+}
+```
+Output:
+```css
+b {margin-left: 5px;}
+ul li {float: right;color: red;}
+```
+
+
+#### raw
+
+With the raw command, you can add a series of rules to the current CSS selector.
+
+```css
+b { margin-right: 5px; }
+
+/*rtl:raw:
+    padding: 6px;
+    font-size: 15px;
+*/
+a {
+    float: left;
+    color: red;
+}
+```
+Output:
+```css
+b {margin-left: 5px;}
+a {float: right;color: red;padding: 6px;font-size: 15px;}
+```
+
+> You can also use all commands simultaneously.
+
+```css
+b { margin-right: 5px; }
+
+/*rtl:rename:.app .drawer*/
+/*rtl:ignore*/
+/*rtl:raw:
+    padding: 6px;
+    font-size: 15px;
+*/
+a {
+    float: left;
+    color: red;
+}
+```
+Output:
+```css
+b { margin-right: 5px; }
+.app .drawer {float: left;color: red;padding: 6px;font-size: 15px;}
+```
