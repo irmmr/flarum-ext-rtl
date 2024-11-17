@@ -15,6 +15,7 @@ use Sabberworm\CSS\CSSList\Document;
 use Sabberworm\CSS\Parser;
 use Sabberworm\CSS\Parsing\SourceException;
 use Sabberworm\CSS\Rule\Rule;
+use Sabberworm\CSS\RuleSet\DeclarationBlock;
 use Sabberworm\CSS\RuleSet\RuleSet;
 //use Sabberworm\CSS\Settings;
 use Sabberworm\CSS\Value\CSSFunction;
@@ -35,6 +36,18 @@ use Sabberworm\CSS\Value\ValueList;
  */
 class RTLCss
 {
+    // remove the selector for rtl
+    protected const O_REMOVE = 'remove';
+
+    // ignore anything for selector
+    protected const O_IGNORE = 'ignore';
+
+    // rename the selector
+    protected const O_RENAME = 'rename';
+
+    // add somthing to selector
+    protected const O_RAW    = 'raw';
+
     /**
      * Parsed tree of css
      * @var  Document
@@ -45,16 +58,6 @@ class RTLCss
      * @var array
      */
     protected array $shouldAddCss = [];
-
-    /**
-     * @var bool
-     */
-    protected bool $shouldIgnore = false;
-
-    /**
-     * @var bool
-     */
-    protected bool $shouldRemove = false;
 
     /**
      * The function is a PHP constructor that initializes a property with a Document object.
@@ -89,7 +92,6 @@ class RTLCss
         return $what === $to;
     }
 
-
     /**
      * The `complement` function in PHP complements the input value by either subtracting it from 100 or
      * subtracting its arguments from 100%.
@@ -107,7 +109,6 @@ class RTLCss
             $value->setListComponents([$arguments]);
         }
     }
-
 
     /**
      * The flip function processes a block within a document and returns the modified document.
@@ -151,30 +152,29 @@ class RTLCss
      * @param array $comments comments The `parseComments` function takes an array of comments as input. It then
      * iterates over each comment in the array and checks for specific patterns within the comment content
      * using regular expressions.
+     *
+     * @return array    List of commands to every Rule
      */
-    protected function parseComments(array $comments): void
+    protected function parseComments(array $comments): array
     {
         $startRule = '^(\s|\*)*!?rtl:';
+        $commands  = [];
 
         foreach ($comments as $comment) {
             $content = $comment->getComment();
 
-            if (preg_match('/' . $startRule . 'ignore/', $content)) {
-                $this->shouldIgnore = 1;
-            } else if (preg_match('/' . $startRule . 'begin:ignore/', $content)) {
-                $this->shouldIgnore = true;
-            } else if (preg_match('/' . $startRule . 'end:ignore/', $content)) {
-                $this->shouldIgnore = false;
-            } else if (preg_match('/' . $startRule . 'remove/', $content)) {
-                $this->shouldRemove = 1;
-            } else if (preg_match('/' . $startRule . 'begin:remove/', $content)) {
-                $this->shouldRemove = true;
-            } else if (preg_match('/' . $startRule . 'end:remove/', $content)) {
-                $this->shouldRemove = false;
-            } else if (preg_match('/' . $startRule . 'raw:/', $content)) {
-                $this->shouldAddCss[] = preg_replace('/' . $startRule . 'raw:/', '', $content);
+            if (preg_match('/' . $startRule . self::O_IGNORE . '/', $content)) {
+                $commands[] = [self::O_IGNORE, ''];
+            } else if (preg_match('/' . $startRule . self::O_REMOVE . '/', $content)) {
+                $commands[] = [self::O_REMOVE, ''];
+            } else if (preg_match('/' . $startRule . self::O_RENAME . ':/', $content)) {
+                $commands[] = [self::O_RENAME, preg_replace('/' . $startRule . self::O_RENAME . ':/', '', $content)];
+            } else if (preg_match('/' . $startRule . self::O_RAW . ':/', $content)) {
+                $commands[] = [self::O_RAW, preg_replace('/' . $startRule . self::O_RAW . ':/', '', $content)];
             }
         }
+
+        return $commands;
     }
 
     /**
@@ -276,24 +276,44 @@ class RTLCss
         $contents = [];
 
         foreach ($block->getContents() as $node) {
-            $this->parseComments($node->getComments());
+            $commands = $this->parseComments( $node->getComments() );
 
-            if ($toAdd = $this->shouldAddCss()) {
-                foreach ($toAdd as $add) {
-                    $parser = new Parser($add);
-                    $contents[] = $parser->parse();
-                }
+            if ($this->shouldRemove($commands)) {
+                continue;
             }
 
-            if ($this->shouldRemoveNext()) {
-                continue;
-            } else if (!$this->shouldIgnoreNext()) {
+            if (!$this->shouldIgnore($commands)) {
                 if ($node instanceof CSSList) {
                     $this->processBlock($node);
                 }
 
                 if ($node instanceof RuleSet) {
                     $this->processDeclaration($node);
+                }
+            }
+
+            [$add_raw, $raw_data] = $this->shouldAddCss($commands);
+
+            if ($add_raw === true) {
+                foreach ($raw_data as $raw) {
+                    $raw_parser = new Parser('.wrapper{' . $raw . '}');
+                    $raw_tree   = $raw_parser->parse();
+
+                    $raw_contents = $raw_tree->getContents();
+
+                    foreach ($raw_contents[0]->getRules() as $rule) {
+                        if ($node instanceof DeclarationBlock) {
+                            $node->addRule($rule);
+                        }
+                    }
+                }
+            }
+
+            [$should_rename, $new_name] = $this->shouldRename($commands);
+
+            if ($should_rename === true) {
+                if ($node instanceof DeclarationBlock) {
+                    $node->setSelectors($new_name);
                 }
             }
 
@@ -318,25 +338,7 @@ class RTLCss
         $rules = [];
 
         foreach ($node->getRules() as $key => $rule) {
-            $this->parseComments($rule->getComments());
-
-            if ($toAdd = $this->shouldAddCss()) {
-                foreach ($toAdd as $add) {
-                    $parser = new Parser('.wrapper{' . $add . '}');
-                    $tree = $parser->parse();
-
-                    $contents = $tree->getContents();
-                    foreach ($contents[0]->getRules() as $newRule) {
-                        $rules[] = $newRule;
-                    }
-                }
-            }
-
-            if ($this->shouldRemoveNext()) {
-                continue;
-            } else if (!$this->shouldIgnoreNext()) {
-                $this->processRule($rule);
-            }
+            $this->processRule($rule);
 
             $rules[] = $rule;
         }
@@ -503,64 +505,6 @@ class RTLCss
     }
 
     /**
-     * The function `shouldAddCss` returns and clears a CSS array if it is not empty, otherwise it returns
-     * an empty array.
-     *
-     * @return array An array of CSS files that need to be added. If there are no CSS files to add, an empty
-     * array is returned.
-     */
-    protected function shouldAddCss(): array
-    {
-        if (!empty($this->shouldAddCss)) {
-            $css = $this->shouldAddCss;
-            $this->shouldAddCss = [];
-
-            return $css;
-        }
-
-        return [];
-    }
-
-    /**
-     * The function `shouldIgnoreNext` checks if a certain condition is met and returns a boolean value
-     * accordingly.
-     *
-     * @return bool The function `shouldIgnoreNext()` returns a boolean value, either `true` or `false`.
-     */
-    protected function shouldIgnoreNext(): bool
-    {
-        if ($this->shouldIgnore) {
-            if (is_int($this->shouldIgnore)) {
-                $this->shouldIgnore--;
-            }
-
-            return true;
-        }
-
-        return false;
-    }
-
-    /**
-     * The function `shouldRemoveNext` checks if a certain condition is met and returns a boolean value
-     * accordingly.
-     *
-     * @return bool The `shouldRemoveNext()` function returns a boolean value - `true` if the conditions
-     * are met for removing the next item, and `false` otherwise.
-     */
-    protected function shouldRemoveNext(): bool
-    {
-        if ($this->shouldRemove) {
-            if (is_int($this->shouldRemove)) {
-                $this->shouldRemove--;
-            }
-
-            return true;
-        }
-
-        return false;
-    }
-
-    /**
      * The function `swap` in PHP swaps occurrences of two specified strings in a given string based on
      * certain options.
      *
@@ -620,5 +564,75 @@ class RTLCss
     protected function swapLtrRtl(string $value): string
     {
         return $this->swap($value, 'ltr', 'rtl');
+    }
+
+    /**
+     * should ignore selector?
+     *
+     * @param   array $commands
+     * @return  bool
+     */
+    protected function shouldIgnore(array $commands): bool
+    {
+        foreach ($commands as $command) {
+            if ($command[0] === self::O_IGNORE) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * should remove selector?
+     *
+     * @param   array $commands
+     * @return  bool
+     */
+    protected function shouldRemove(array $commands): bool
+    {
+        foreach ($commands as $command) {
+            if ($command[0] === self::O_REMOVE) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * should remove selector?
+     *
+     * @param   array $commands
+     * @return  array
+     */
+    protected function shouldAddCss(array $commands): array
+    {
+        $raw_data = [];
+
+        foreach ($commands as $command) {
+            if ($command[0] === self::O_RAW) {
+                $raw_data[] = $command[1];
+            }
+        }
+
+        return [!empty($raw_data), $raw_data];
+    }
+
+    /**
+     * should remove selector?
+     *
+     * @param   array $commands
+     * @return  array
+     */
+    protected function shouldRename(array $commands): array
+    {
+        foreach ($commands as $command) {
+            if ($command[0] === self::O_RENAME) {
+                return [true, $command[1]];
+            }
+        }
+
+        return [false, ''];
     }
 }
