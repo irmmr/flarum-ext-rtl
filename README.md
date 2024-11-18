@@ -5,7 +5,7 @@
     <a href="https://github.com/flarum/core" target="_blank">
         <img src="https://img.shields.io/badge/flarum%2Fcore-%5Ev1.1.1-blue?style=flat-square">
     </a>
-    <img src="https://iili.io/7jvWrb.png">
+    <img src="https://i.postimg.cc/0yfcq73t/Screenshot-2024-11-18-at-12-38-50-Flarum-Community.png">
 </p>
 <hr>
 
@@ -139,6 +139,6 @@ a {
 ```
 Output:
 ```css
-b { margin-right: 5px; }
+b { margin-left: 5px; }
 .app .drawer {float: left;color: red;padding: 6px;font-size: 15px;}
 ```
