@@ -139,6 +139,6 @@ a {
 ```
 Output:
 ```css
-b { margin-right: 5px; }
+b { margin-left: 5px; }
 .app .drawer {float: left;color: red;padding: 6px;font-size: 15px;}
 ```
