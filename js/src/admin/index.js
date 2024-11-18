@@ -1,4 +1,5 @@
 import app from 'flarum/admin/app';
+import changeNavBackBtn from '../common/changeNavBackBtn';
 
 app.initializers.add('irmmr-flarum-rtl-adm', () => {
   app.extensionData.for('irmmr-rtl').registerSetting({
@@ -29,4 +30,8 @@ app.initializers.add('irmmr-flarum-rtl-adm', () => {
         "irmmr-rtl.admin.settings.ad_status_text",
       ),
   });
+
+  if (document.dir === 'rtl') {
+      changeNavBackBtn();
+  }
 });
