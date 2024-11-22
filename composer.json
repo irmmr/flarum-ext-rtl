@@ -14,7 +14,7 @@
     "flarum/core": "^v1.1.1",
     "sabberworm/php-css-parser": "^8.7",
     "matthiasmullie/minify": "^1.3",
-    "irmmr/rtlcss": "^1.2"
+    "irmmr/rtlcss": "^1.4"
   },
   "autoload": {
     "psr-4": {
