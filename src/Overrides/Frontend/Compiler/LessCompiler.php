@@ -12,13 +12,13 @@ namespace Flarum\Frontend\Compiler;
 use Flarum\Frontend\Compiler\Source\FileSource;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
-use Irmmr\FlarumRtlSupport\Pack\RTLCss;
 use Less_FileManager;
 use Less_Parser;
 use Less_Tree_Import;
 use Sabberworm\CSS\Parser;
 use Sabberworm\CSS\Parsing\SourceException;
 use MatthiasMullie\Minify;
+use Irmmr\RTLCss\Parser as RTLParser;
 
 /**
  * @internal
@@ -173,7 +173,7 @@ class LessCompiler extends RevisionCompiler
         }
 
         // trying to generate RTL css from main sources
-        $rtlcss = new RTLCss($css_tree);
+        $rtlcss = new RTLParser($css_tree);
 
         try {
             $rtlcss->flip();
