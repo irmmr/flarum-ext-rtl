@@ -12,6 +12,7 @@ namespace Flarum\Frontend\Compiler;
 use Flarum\Frontend\Compiler\Source\FileSource;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
+use Irmmr\RTLCss\Encode;
 use Less_FileManager;
 use Less_Parser;
 use Less_Tree_Import;
@@ -163,6 +164,11 @@ class LessCompiler extends RevisionCompiler
         // generate rtl file name
         $rtl_file  = $path_info['filename'] . '.rtl.' . $path_info['extension'];
 
+        // encode css code before parsing
+        $rtl_encoder = new Encode($css_content);
+
+        $css_content = $rtl_encoder->encode();
+
         // trying to parse created css sources
         $css_parser = new Parser($css_content);
 
@@ -181,8 +187,12 @@ class LessCompiler extends RevisionCompiler
             return false;
         }
 
+        // render css
+        $rendered = $css_tree->render();
+        $rtl_encoder->setEncoded($rendered);
+
         // apply rtl file
-        return $this->assetsDir->put($rtl_file, $this->css_code_minify($css_tree->render()));
+        return $this->assetsDir->put($rtl_file, $this->css_code_minify( $rtl_encoder->decode() ));
     }
 
     protected function finalize(string $parsedCss): string
