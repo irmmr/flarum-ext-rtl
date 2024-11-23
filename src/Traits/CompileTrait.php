@@ -9,7 +9,6 @@
  */
 
 namespace Irmmr\FlarumRtlSupport\Traits;
-use Flarum\Frontend\Document;
 
 /**
  * trait LangTrait
@@ -35,11 +34,19 @@ trait CompileTrait
     protected function get_file_rtl(string $file): string
     {
         $path_info = pathinfo($file);
+        $extension = $path_info['extension'] ?? '';
+
+        // file is not a css file
+        if (substr($extension, 0, 3) !== 'css') {
+            return $file;
+        }
 
         return $path_info['dirname'] . '/' . $path_info['filename'] . '.rtl.' . $path_info['extension'];
     }
 
     /**
+     * file is a local css?
+     *
      * @param   string $file
      * @return  bool
      */
@@ -58,14 +65,9 @@ trait CompileTrait
      */
     protected function make_css_rtl(array $css_urls): array
     {
-        $count = count($css_urls);
-
-        for ($i = 0; $i <= $count; $i++) {
-            $file = $css_urls[$i];
-
-            // check if css file is local
+        foreach ($css_urls as $key => $file) {
             if (is_string($file) && $this->is_file_local($file)) {
-                $css_urls[$i] = $this->get_file_rtl($file);
+                $css_urls[ $key ] = $this->get_file_rtl($file);
             }
         }
 
@@ -80,18 +82,14 @@ trait CompileTrait
      */
     protected function make_head_rtl(array $heads): array
     {
-        $count = count($heads);
-
-        for ($i = 0; $i <= $count; $i++) {
-            $head = $heads[$i];
-
+        foreach ($heads as $key => $head) {
             preg_match_all($this->stylesheet_pattern, $head, $matches, PREG_SET_ORDER);
 
             foreach ($matches as $match) {
                 $url = $match[1] ?? '';
 
                 if (filter_var($url, FILTER_SANITIZE_URL) && $this->is_file_local($url)) {
-                    $heads[$i] = str_replace($url, $this->get_file_rtl($url), $head);
+                    $heads[ $key ] = str_replace($url, $this->get_file_rtl($url), $head);
                 }
             }
         }
