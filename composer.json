@@ -1,8 +1,8 @@
 {
   "name": "irmmr/flarum-ext-rtl",
   "type": "flarum-extension",
-  "keywords": ["RTL", "flarum-rtl", "flarum"],
-  "description": "A collection of Right-to-Left (rtl) direction support for \"Flarum\" core and extensions.",
+  "keywords": ["RTL", "flarum-rtl", "flarum", "flarum-ext"],
+  "description": "Right-to-Left (rtl) direction support for \"Flarum\" core and extensions.",
   "license": "MIT",
   "authors": [
     {
@@ -11,7 +11,7 @@
     }
   ],
   "require": {
-    "flarum/core": "^v1.1.1",
+    "flarum/core": "^v1.7.0",
     "sabberworm/php-css-parser": "^8.7",
     "matthiasmullie/minify": "^1.3",
     "irmmr/rtlcss": "^1.4"
@@ -31,8 +31,8 @@
     "flarum-extension": {
       "title": "RTL Support",
       "icon": {
-        "name": "fas fa-directions",
-        "backgroundColor": "#192a56",
+        "name": "fas fa-exchange-alt",
+        "backgroundColor": "#e66767",
         "color": "#fff"
       }
     }
