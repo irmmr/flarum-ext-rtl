@@ -44,4 +44,5 @@ With a series of commands, you can control the generated codes for RTL (right-to
 
 Please see `rtl-css`
 
-https://github.com/irmmr/rtl-css
+
+[https://github.com/irmmr/rtl-css](https://github.com/irmmr/rtl-css)
