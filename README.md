@@ -7,9 +7,10 @@
     </a>
     <img src="https://i.postimg.cc/0yfcq73t/Screenshot-2024-11-18-at-12-38-50-Flarum-Community.png">
 </p>
-<hr>
 
-<center><h4>Flarum RTL extension</h4></center>
+---
+
+### Flarum RTL extension
 
 This extension is for adding RTL support to Flarum. Unlike previous versions, you no longer need to write additional `LESS/CSS` for your forum.
 
