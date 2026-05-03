@@ -1,6 +1,6 @@
-import app from 'flarum/app';
-import DiscussionListPane from 'flarum/components/DiscussionListPane';
-import DiscussionPage from 'flarum/components/DiscussionPage';
+import app from 'flarum/forum/app';
+import DiscussionListPane from 'flarum/forum/components/DiscussionListPane';
+import DiscussionPage from 'flarum/forum/components/DiscussionPage';
 
 /*
  * see here: https://github.com/flarum/core/blob/master/js/src/forum/components/DiscussionListPane.js

@@ -1,10 +1,13 @@
 import changePaneShowX from './changePaneShowX';
-import changeNavBackBtn from '../common/changeNavBackBtn';
-import app from 'flarum/app';
+import changeNavigationBackBtn from '../common/changeNavigationBackBtn';
+import app from 'flarum/forum/app';
+import extendToolip from '../common/extendTooltip';
 
-app.initializers.add('irmmr-flarum-rtl-ext', () => {
+app.initializers.add('irmmr-rtl', () => {
     if (document.dir === 'rtl') {
         changePaneShowX();
-        changeNavBackBtn();
+        changeNavigationBackBtn();
+        // extendDiscussionListItem();
+        extendToolip();
     }
 });

@@ -11,15 +11,13 @@ namespace Flarum\Frontend\Compiler;
 
 use Flarum\Frontend\Compiler\Source\FileSource;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Str;
 use Irmmr\RTLCss\Encode;
-use Less_FileManager;
-use Less_Parser;
-use Less_Tree_Import;
-use Sabberworm\CSS\Parser;
-use Sabberworm\CSS\Parsing\SourceException;
 use MatthiasMullie\Minify;
 use Irmmr\RTLCss\Parser as RTLParser;
+use Less_Exception_Compiler;
+use Less_Parser;
+use Sabberworm\CSS\Parser;
+use Sabberworm\CSS\Parsing\SourceException;
 
 /**
  * @internal
@@ -76,48 +74,90 @@ class LessCompiler extends RevisionCompiler
             return '';
         }
 
+        if (! empty($this->settings->get('custom_less_error'))) {
+            unset($sources['custom_less']);
+        }
+
+        $maxNestingLevel = ini_get('xdebug.max_nesting_level');
+
         ini_set('xdebug.max_nesting_level', '200');
 
-        $parser = new Less_Parser([
-            'compress' => false, // disable compress for save css comments
-            'cache_dir' => $this->cacheDir,
-            'import_dirs' => $this->importDirs,
-            'import_callback' => $this->lessImportOverrides ? $this->overrideImports($sources) : null,
-        ]);
+        try {
+            $parser = new Less_Parser([
+                'compress' => false, // disable compress for save css comments
+                'strictMath' => false,
+                'cache_dir' => $this->cacheDir,
+                'import_dirs' => $this->importDirs,
+            ]);
 
-        if ($this->fileSourceOverrides) {
-            $sources = $this->overrideSources($sources);
-        }
+            if ($this->fileSourceOverrides) {
+                $sources = $this->overrideSources($sources);
+            }
 
-        foreach ($sources as $source) {
-            if ($source instanceof FileSource) {
-                $parser->parseFile($source->getPath());
-            } else {
-                $parser->parse($source->getContent());
+            foreach ($sources as $source) {
+                if ($source instanceof FileSource) {
+                    // If we have import overrides, parse the file content and apply them
+                    if ($this->lessImportOverrides && $this->lessImportOverrides->isNotEmpty()) {
+                        $content = file_get_contents($source->getPath());
+                        $content = $this->applyImportOverridesToContent($content);
+                        // Pass the original file path to maintain proper import resolution context
+                        $parser->parse($content, $source->getPath());
+                    } else {
+                        $parser->parseFile($source->getPath());
+                    }
+                } else {
+                    $parser->parse($source->getContent());
+                }
+            }
+
+            foreach ($this->customFunctions as $name => $callback) {
+                $parser->registerFunction($name, $callback);
+            }
+
+            try {
+                $compiled = $this->finalize($parser->getCss());
+
+                if (isset($sources['custom_less']) && $this->settings->get('custom_less_error')) {
+                    $this->settings->delete('custom_less_error');
+                }
+
+                return $compiled;
+            } catch (Less_Exception_Compiler $e) {
+                if (isset($sources['custom_less'])) {
+                    unset($sources['custom_less']);
+
+                    $compiled = $this->compile($sources);
+
+                    $this->settings->set('custom_less_error', $e->getMessage());
+
+                    return $compiled;
+                }
+
+                throw $e;
+            }
+        } finally {
+            if ($maxNestingLevel !== false) {
+                ini_set('xdebug.max_nesting_level', $maxNestingLevel);
             }
         }
+    }
 
-        foreach ($this->customFunctions as $name => $callback) {
-            $parser->registerFunction($name, $callback);
-        }
-
-        return $this->finalize($parser->getCss());
+    protected function finalize(string $parsedCss): string
+    {
+        return str_replace('url("../webfonts/', 'url("./fonts/', $parsedCss);
     }
 
     /**
-     * +++
-     * minify css file
+     * #new
+     * Minify the css code.
      *
-     * @private
-     *
-     * @param   string  $css
-     * @return  string  minified
+     * @param  string $css
+     * @return string
      */
-    protected function css_code_minify(string $css): string
+    protected function minifyCssCode(string $css): string
     {
-        $minifier = new Minify\CSS;
+        $minifier = new Minify\Css;
 
-        // add plain css code
         $minifier->add($css);
         $minify = $minifier->minify();
 
@@ -126,78 +166,82 @@ class LessCompiler extends RevisionCompiler
         }
 
         $time = date('Y/m/d H:i:s');
-
         return "/* minified at {$time} */" . PHP_EOL . $minify;
     }
 
     /**
-     * save compiled less file + generated rtl
-     * file.less -> file.css + file.rtl.css
+     * @param string $file
+     * @param SourceInterface[] $sources
+     * @return bool true if the file was written, false if there was nothing to write
      */
     protected function save(string $file, array $sources): bool
     {
-        if (empty($sources)) {
-            return false;
-        }
+        if ($content = $this->compile($sources)) {
+            // save minified version
+            $this->assetsDir->put($file, $this->minifyCssCode($content));
 
-        // less -> css
-        try {
-            $css_content = $this->compile($sources);
-        } catch (\Less_Exception_Parser $e) {
-            return false;
-        }
+            $pathInfo = pathinfo($file);
 
-        // add main css file + minify
-        if (!$this->assetsDir->put($file, $this->css_code_minify($css_content))) {
-            return false;
-        }
+            // ignore for rtl files
+            if (str_ends_with($pathInfo['filename'], '.rtl')) {
+                return true;
+            }
 
-        // parse main file name
-        $path_info = pathinfo($file);
+            // [file].rtl.[ext]
+            $rtlFile = $pathInfo['filename'] . '.rtl.' . $pathInfo['extension'];
 
-        // check for target file
-        // - ignore for rtl files!
-        if (substr($path_info['filename'], -strlen('.rtl')) === '.rtl') {
+            $rtlEncoder = new Encode($content);
+            $content = $rtlEncoder->encode();
+
+            try {
+                $cssParser = new Parser($content);
+                $cssTree = $cssParser->parse();
+
+                $rtlParser = new RTLParser($cssTree);
+                $rtlParser->flip();
+
+                $rendered = $cssTree->render();
+                $rtlEncoder->setEncoded($rendered);
+            } catch (SourceException) {
+                return false;
+            }
+
+            // save minified rtl file
+            $this->assetsDir->put($rtlFile, $this->minifyCssCode($rtlEncoder->decode()));
+
             return true;
         }
 
-        // generate rtl file name
-        $rtl_file  = $path_info['filename'] . '.rtl.' . $path_info['extension'];
-
-        // encode css code before parsing
-        $rtl_encoder = new Encode($css_content);
-
-        $css_content = $rtl_encoder->encode();
-
-        // trying to parse created css sources
-        $css_parser = new Parser($css_content);
-
-        try {
-            $css_tree   = $css_parser->parse();
-        } catch (SourceException $e) {
-            return false;
-        }
-
-        // trying to generate RTL css from main sources
-        $rtlcss = new RTLParser($css_tree);
-
-        try {
-            $rtlcss->flip();
-        } catch (SourceException $e) {
-            return false;
-        }
-
-        // render css
-        $rendered = $css_tree->render();
-        $rtl_encoder->setEncoded($rendered);
-
-        // apply rtl file
-        return $this->assetsDir->put($rtl_file, $this->css_code_minify( $rtl_encoder->decode() ));
+        return false;
     }
 
-    protected function finalize(string $parsedCss): string
+    /**
+     * Apply import overrides by replacing @import statements with inline content.
+     */
+    private function applyImportOverridesToContent(string $content): string
     {
-        return str_replace('url("../webfonts/', 'url("./fonts/', $parsedCss);
+        foreach ($this->lessImportOverrides as $override) {
+            $file = $override['file'];
+            $fileWithoutExt = preg_replace('/\.less$/i', '', $file);
+            $quotedFile = preg_quote($fileWithoutExt, '/');
+
+            // Match @import "path" or @import 'path' (with or without .less extension)
+            $pattern = '/@import\s+["\']'.$quotedFile.'(\.less)?["\'];?/i';
+
+            if (preg_match($pattern, $content)) {
+                // Read the override file content
+                $overrideContent = file_get_contents($override['newFilePath']);
+
+                // Replace the @import statement with the actual content
+                $content = preg_replace(
+                    $pattern,
+                    '/* Flarum override: '.$file.' */'."\n".$overrideContent."\n".'/* End override */',
+                    $content
+                );
+            }
+        }
+
+        return $content;
     }
 
     protected function overrideSources(array $sources): array
@@ -216,38 +260,6 @@ class LessCompiler extends RevisionCompiler
         }
 
         return $sources;
-    }
-
-    protected function overrideImports(array $sources): callable
-    {
-        $baseSources = (new Collection($sources))->filter(function ($source) {
-            return $source instanceof Source\FileSource;
-        })->map(function (FileSource $source) {
-            $path = realpath($source->getPath());
-            $path = Str::beforeLast($path, '/less/');
-
-            return [
-                'path' => $path,
-                'extensionId' => $source->getExtensionId(),
-            ];
-        })->unique('path');
-
-        return function (Less_Tree_Import $evald) use ($baseSources): ?array {
-            $pathAndUri = Less_FileManager::getFilePath($evald->getPath(), $evald->currentFileInfo);
-
-            $relativeImportPath = Str::of($pathAndUri[0])->split('/\/less\//');
-            $extensionId = $baseSources->where('path', $relativeImportPath->first())->pluck('extensionId')->first();
-
-            $overrideImport = $this->lessImportOverrides
-                ->where('file', $relativeImportPath->last())
-                ->firstWhere('extensionId', $extensionId);
-
-            if (! $overrideImport) {
-                return null;
-            }
-
-            return [$overrideImport['newFilePath'], $pathAndUri[1]];
-        };
     }
 
     protected function getCacheDifferentiator(): ?array

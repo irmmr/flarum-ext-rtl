@@ -1,4 +1,4 @@
-import { extend } from 'flarum/extend';
+import { extend } from 'flarum/common/extend';
 import Navigation from 'flarum/common/components/Navigation';
 
 export default function () {
