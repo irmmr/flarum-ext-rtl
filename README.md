@@ -3,7 +3,7 @@
         <img src="https://img.shields.io/packagist/v/irmmr/flarum-ext-rtl?style=flat-square">
     </a>
     <a href="https://github.com/flarum/core" target="_blank">
-        <img src="https://img.shields.io/badge/flarum%2Fcore-%5Ev1.1.1-blue?style=flat-square">
+        <img src="https://img.shields.io/badge/flarum%2Fcore-%5Ev2.0.0@rc.1-blue?style=flat-square">
     </a>
     <img src="https://i.postimg.cc/0yfcq73t/Screenshot-2024-11-18-at-12-38-50-Flarum-Community.png">
 </p>
