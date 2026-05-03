@@ -33,7 +33,7 @@ abstract class BaseContent implements HasSettings
 
     /**
      * Define rtl languages.
-     * 
+     *
      * @var array $rtlLanguages
      */
     protected array $rtlLanguages = ['fa', 'ar', 'he'];
@@ -108,7 +108,7 @@ abstract class BaseContent implements HasSettings
 
     /**
      * Get rtl version of a file.
-     * 
+     *
      * @param  string $file
      * @return string
      */
@@ -181,7 +181,7 @@ abstract class BaseContent implements HasSettings
 
     /**
      * Make payload rtl.
-     * 
+     *
      * @todo need some improvement
      * @param  array $payloads
      * @return array

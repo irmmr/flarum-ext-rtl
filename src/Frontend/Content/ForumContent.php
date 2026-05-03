@@ -17,8 +17,8 @@ class ForumContent extends BaseContent
      */
     public function __invoke(Document $document, ServerRequestInterface $request): void
     {
-        // check if rtl status is active for admin document
-        if (!$this->mustBeRtl($document, 'admin')) {
+        // check if rtl status is active for forum document
+        if (!$this->mustBeRtl($document, 'forum')) {
             return;
         }
 
