@@ -207,6 +207,7 @@ export default class RtlSettingsPage extends ExtensionPage {
                                     <div className="PayloadItem ForceLtrField" key={i}>
                                         <input
                                             className="FormControl Payload-value ForceLtrField"
+                                            placeholder={app.translator.trans('irmmr-rtl.admin.settings.payloads.placeholder')}
                                             value={payload}
                                             onchange={(e: any) => this.updatePayload(i, e.target.value)}
                                         />

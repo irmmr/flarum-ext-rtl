@@ -32,6 +32,7 @@ irmmr-rtl:
                 regenerate the compiled assets.
 
             payloads:
+                placeholder: "Payload key, e.g. fof-nightmode.assets.day"
                 section_title: Payload Overrides
                 empty_text: No payloads added yet
                 add_button: Add Payload
