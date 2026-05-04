@@ -18,7 +18,7 @@ class AdminContent extends BaseContent
     public function __invoke(Document $document, ServerRequestInterface $request): void
     {
         // check if rtl status is active for admin document
-        if (!$this->mustBeRtl($document, 'admin')) {
+        if (!$this->mirrorService->documentMustBeRtl($document, 'admin')) {
             return;
         }
 
@@ -28,6 +28,7 @@ class AdminContent extends BaseContent
         // find and convert all css files to their rtl version
         // file.css => file.rtl.css
         $document->css      = $this->makeCssRtl($document->css);
+        $document->js       = $this->makeJsRtl($document->js);
         $document->head     = $this->makeHeadRtl($document->head);
         $document->payload  = $this->makePayloadRtl($document->payload);
 

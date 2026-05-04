@@ -28,4 +28,8 @@ return [
         ->default('irmmr-rtl.lang_base', true)
         ->default('irmmr-rtl.ad_status', true)
         ->default('irmmr-rtl.fm_status', true)
+        ->default('irmmr-rtl.driver', 'rtlcss')
+        ->default('irmmr-rtl.css_minify', true)
+        ->default('irmmr-rtl.payloads', '')
+        ->default('irmmr-rtl.asset_rules', '')
 ];

@@ -84,7 +84,7 @@ class LessCompiler extends RevisionCompiler
 
         try {
             $parser = new Less_Parser([
-                'compress' => false, // disable compress for save css comments
+                'compress' => !$this->useRtlCompiler(), // disable compress for save css comments
                 'strictMath' => false,
                 'cache_dir' => $this->cacheDir,
                 'import_dirs' => $this->importDirs,
@@ -148,6 +148,26 @@ class LessCompiler extends RevisionCompiler
     }
 
     /**
+     * Determine rtl compiler status.
+     *
+     * @return bool
+     */
+    protected function useRtlCompiler(): bool
+    {
+        return $this->settings->get('irmmr-rtl.driver', 'rtlcss') === 'rtlcss';
+    }
+
+    /**
+     * Determine css minifier status.
+     *
+     * @return bool
+     */
+    protected function useCssMinifier(): bool
+    {
+        return $this->settings->get('irmmr-rtl.css_minify', true);
+    }
+
+    /**
      * #new
      * Minify the css code.
      *
@@ -177,8 +197,14 @@ class LessCompiler extends RevisionCompiler
     protected function save(string $file, array $sources): bool
     {
         if ($content = $this->compile($sources)) {
-            // save minified version
-            $this->assetsDir->put($file, $this->minifyCssCode($content));
+            $useMinifier = $this->useCssMinifier();
+
+            $this->assetsDir->put($file, $useMinifier ? $this->minifyCssCode($content) : $content);
+
+            // don't use that compiler!
+            if (!$this->useRtlCompiler()) {
+                return true;
+            }
 
             $pathInfo = pathinfo($file);
 
@@ -207,7 +233,9 @@ class LessCompiler extends RevisionCompiler
             }
 
             // save minified rtl file
-            $this->assetsDir->put($rtlFile, $this->minifyCssCode($rtlEncoder->decode()));
+            $this->assetsDir->put($rtlFile, $useMinifier
+                ? $this->minifyCssCode($rtlEncoder->decode())
+                : $rtlEncoder->decode());
 
             return true;
         }

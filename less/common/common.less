@@ -1,32 +1,6 @@
-html[dir="rtl"] {
-    @import "checkbox";
-
-    .Select {
-        display: inline-flex !important;
-        align-items: center;
-    }
-}
-
-/* rtl:ignore */
-html[dir="rtl"] .tooltip.left .tooltip-arrow {
-    right: 0;
-    left: auto !important;
-
-    border-width: var(--tooltip-arrow-width) 0 var(--tooltip-arrow-width) var(--tooltip-arrow-width);
-    border-left-color: var(--tooltip-bg);
-    border-right-color: transparent;
-}
-
-/* rtl:ignore */
-html[dir="rtl"] .tooltip.right .tooltip-arrow {
-    left: 0;
-    right: auto !important;
-
-    border-width: var(--tooltip-arrow-width) var(--tooltip-arrow-width) var(--tooltip-arrow-width) 0;
-    border-right-color: var(--tooltip-bg);
-    border-left-color: transparent;
-}
-
+@import "checkbox";
+@import "select";
+@import "tooltip";
 
 /* rtl:ignore */
 input[type="email"],

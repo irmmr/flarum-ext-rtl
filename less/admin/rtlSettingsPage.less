@@ -1,0 +1,85 @@
+.RtlSettings-page {
+    margin-top: 20px;
+    padding: 20px 0;
+
+    .RtlList {
+        margin-bottom: 15px;
+
+        .AssetRuleItem .Select i.icon {
+            display: none;
+        }
+
+        .RtlList-empty {
+            text-align: center;
+            padding: 30px;
+
+            i {
+                font-size: 2.5rem;
+                color: var(--primary-color);
+            }
+
+            span {
+                font-size: 1.2rem;
+                margin-top: 7px;
+                display: block;
+                color: var(--primary-color);
+            }
+        }
+    }
+
+    .RtlGroupText {
+        margin-top: 15px;
+        padding: 4px;
+    }
+
+    .RtlGroup {
+        .FormSection-body {
+            display: flex;
+            flex-direction: column;
+
+            .RtlList {
+                flex: 1 1 auto;
+            }
+        }
+    }
+
+    .AssetRuleItem {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 12px;
+
+        .Select {
+            display: inline !important;
+            width: auto !important;
+        }
+
+        .AssetRuleItem-pattern,
+        .AssetRuleItem-replace {
+            flex: 2 1 0;
+        }
+
+        .AssetRuleItem-type {
+            flex: 0 0 120px;
+        }
+    }
+
+    .PayloadItem {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 12px;
+
+        .PayloadItem-value {
+            flex: 2 1 0;
+        }
+    }
+
+    .RtlSectionGroup {
+        margin-top: 1.5rem;
+
+        .RtlGroup {
+            max-width: unset !important; 
+        }
+    }
+}
