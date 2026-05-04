@@ -4,6 +4,13 @@ irmmr-rtl:
             lang_base_label: Language-based RTL
             lang_base_text: When enabled, RTL is applied only if the active interface language supports RTL. When disabled, forum/admin RTL settings are applied unconditionally.
 
+            rtl_languages_label: RTL Language Codes
+            rtl_languages_placeholder: "fa, ar, he, ur"
+            rtl_languages_text: >
+                Comma-separated list of language codes that should be treated as
+                right-to-left when Language-based RTL is enabled. Example:
+                fa, ar, he, ur
+
             fm_status_label: Forum RTL
             fm_status_text: Enables RTL layout for the forum frontend. If Language-based RTL is enabled, this applies only when the selected language is RTL.
 

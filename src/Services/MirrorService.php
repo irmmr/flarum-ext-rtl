@@ -17,7 +17,7 @@ class MirrorService implements HasSettings
      *
      * @var array $rtlLanguages
      */
-    public array $rtlLanguages = ['fa', 'ar', 'he'];
+    public array $rtlLanguages = [];
 
     /**
      * Url separator. wtf
@@ -48,6 +48,27 @@ class MirrorService implements HasSettings
     ) {}
 
     /**
+     * Get rtl languages.
+     *
+     * @return array
+     */
+    public function getRtlLanguages(): array
+    {
+        if (!empty($this->rtlLanguages)) {
+            return $this->rtlLanguages;
+        }
+
+        $value = (string) $this->settings->get('irmmr-rtl.rtl_languages', 'fa, ar, he, ur');
+
+        $languages = array_filter(array_map(
+            static fn ($lang) => strtolower(trim($lang)),
+            explode(',', $value)
+        ));
+
+        return $this->rtlLanguages = array_values(array_unique($languages));
+    }
+
+    /**
      * Check RTL support based on language.
      *
      * @param   string $language
@@ -55,7 +76,7 @@ class MirrorService implements HasSettings
      */
     public function isLangSupportRtl(string $language): bool
     {
-        return in_array($language, $this->rtlLanguages, true);
+        return in_array($language, $this->getRtlLanguages(), true);
     }
 
     /**

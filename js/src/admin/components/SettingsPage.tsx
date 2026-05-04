@@ -118,6 +118,14 @@ export default class RtlSettingsPage extends ExtensionPage {
                         })}
 
                         {this.buildSettingComponent({
+                            type: 'text',
+                            setting: 'irmmr-rtl.rtl_languages',
+                            label: app.translator.trans('irmmr-rtl.admin.settings.rtl_languages_label'),
+                            help: app.translator.trans('irmmr-rtl.admin.settings.rtl_languages_text'),
+                            placeholder: app.translator.trans('irmmr-rtl.admin.settings.rtl_languages_placeholder'),
+                        })}
+
+                        {this.buildSettingComponent({
                             type: 'boolean',
                             setting: 'irmmr-rtl.fm_status',
                             label: app.translator.trans('irmmr-rtl.admin.settings.fm_status_label'),

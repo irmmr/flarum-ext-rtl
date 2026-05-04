@@ -26,6 +26,7 @@ return [
 
     (new Extend\Settings())
         ->default('irmmr-rtl.lang_base', true)
+        ->default('irmmr-rtl.rtl_languages', 'fa, ar, he, ur')
         ->default('irmmr-rtl.ad_status', true)
         ->default('irmmr-rtl.fm_status', true)
         ->default('irmmr-rtl.driver', 'rtlcss')
