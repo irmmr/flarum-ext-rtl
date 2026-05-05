@@ -24,6 +24,8 @@ class AssetMappingService
 
     /**
      * Maximum memo size.
+     *
+     * @var int
      */
     protected static int $memoLimit = 128;
 
