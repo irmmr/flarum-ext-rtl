@@ -1,40 +1,46 @@
 {
-  "name": "irmmr/flarum-ext-rtl",
-  "type": "flarum-extension",
-  "keywords": ["RTL", "flarum-rtl", "flarum", "flarum-ext"],
-  "description": "Right-to-Left (rtl) direction support for \"Flarum\" core and extensions.",
-  "license": "MIT",
-  "authors": [
-    {
-      "name": "irmmr",
-      "email": "irmmr.ir@gmail.com"
-    }
-  ],
-  "require": {
-    "flarum/core": "^2.0.0-rc.1",
-    "sabberworm/php-css-parser": "^9.1",
-    "matthiasmullie/minify": "^1.3",
-    "irmmr/rtlcss": "^1.5.1"
-  },
-  "autoload": {
-    "psr-4": {
-        "Irmmr\\FlarumRtlSupport\\": "src/"
+  	"name": "irmmr/flarum-ext-rtl",
+  	"type": "flarum-extension",
+ 	"keywords": ["RTL", "flarum-rtl", "flarum", "flarum-ext"],
+  	"description": "Right-to-Left (rtl) direction support for \"Flarum\" core and extensions.",
+  	"license": "MIT",
+    "support": {
+        "issues": "https://github.com/irmmr/rtl-css/issues",
+        "source": "https://github.com/irmmr/rtl-css",
+        "forum": "https://discuss.flarum.org/d/29660"
     },
-    "files": [
-      "src/Overrides/Frontend/Compiler/LessCompiler.php"
-    ]
-  },
-  "extra": {
-    "branch-alias": {
-      "dev-main": "1.x-dev"
-    },
-    "flarum-extension": {
-      "title": "RTL Support",
-      "icon": {
-        "name": "fas fa-exchange-alt",
-        "backgroundColor": "#e66767",
-        "color": "#fff"
-      }
-    }
-  }
+	"authors": [
+		{
+			"name": "irmmr",
+			"email": "irmmr.ir@gmail.com"
+		}
+	],
+	"require": {
+		"flarum/core": "^2.0.0",
+		"sabberworm/php-css-parser": "^9.1",
+		"matthiasmullie/minify": "^1.3",
+		"irmmr/rtlcss": "^1.5.1"
+	},
+	"autoload": {
+		"psr-4": {
+			"Irmmr\\FlarumRtlSupport\\": "src/"
+		},
+		"files": [
+			"src/Overrides/Frontend/Compiler/LessCompiler.php"
+		]
+	},
+	"extra": {
+		"branch-alias": {
+			"dev-main": "1.x-dev"
+		},
+		"flarum-extension": {
+			"title": "RTL Support",
+			"category": "language",
+			"icon": {
+				"name": "fas fa-exchange-alt",
+				"backgroundColor": "#e66767",
+				"color": "#fff"
+			}
+		}
+	}
 }
