@@ -176,7 +176,7 @@ class LessCompiler extends RevisionCompiler
      */
     protected function minifyCssCode(string $css): string
     {
-        $minifier = new Minify\Css;
+        $minifier = new Minify\CSS;
 
         $minifier->add($css);
         $minify = $minifier->minify();
