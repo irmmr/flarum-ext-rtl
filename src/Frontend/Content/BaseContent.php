@@ -70,11 +70,11 @@ abstract class BaseContent
     {
         foreach ($jsUrls as $key => $file) {
             if (is_string($file)) {
-                $cssUrls[$key] = $this->mirrorService->getFileRtl($file);
+                $jsUrls[$key] = $this->mirrorService->getFileRtl($file);
             }
         }
 
-        return $cssUrls;
+        return $jsUrls;
     }
 
     /**

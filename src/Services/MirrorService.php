@@ -106,7 +106,7 @@ class MirrorService implements HasSettings
      */
     public function isUrl(string $raw): bool
     {
-        return filter_var($raw, FILTER_SANITIZE_URL);
+        return filter_var($raw, FILTER_SANITIZE_URL) !== false;
     }
 
     /**
