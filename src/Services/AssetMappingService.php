@@ -4,10 +4,20 @@ namespace Irmmr\FlarumRtlSupport\Services;
 
 use Flarum\Settings\SettingsRepositoryInterface;
 use Irmmr\FlarumRtlSupport\Enums\AssetRuleType;
+use Irmmr\FlarumRtlSupport\Interfaces\HasSettings;
+use Irmmr\FlarumRtlSupport\Traits\SettingsTrait;
 use Irmmr\FlarumRtlSupport\ValueObjects\AssetRule;
 
-class AssetMappingService
+use function json_validate;
+use function json_decode;
+use function is_array;
+use function array_shift;
+use function preg_match;
+
+class AssetMappingService implements HasSettings
 {
+    use SettingsTrait;
+
     /**
      * Memoized results.
      *
@@ -52,7 +62,7 @@ class AssetMappingService
      */
     public function parseRules(): array
     {
-        $raw = $this->settings->get('irmmr-rtl.asset_rules', '');
+        $raw = $this->getSettingOption('irmmr-rtl.asset_rules', '');
 
         /** @var array */
         $rules = match (true) {

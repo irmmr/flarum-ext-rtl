@@ -8,6 +8,12 @@ use Irmmr\FlarumRtlSupport\Traits\SettingsTrait;
 use Flarum\Frontend\Document;
 use Flarum\Foundation\Application;
 
+use function pathinfo;
+use function join;
+use function filter_var;
+use function array_map;
+use function array_filter;
+
 class MirrorService implements HasSettings
 {
     use SettingsTrait;
@@ -58,7 +64,8 @@ class MirrorService implements HasSettings
             return $this->rtlLanguages;
         }
 
-        $value = (string) $this->settings->get('irmmr-rtl.rtl_languages', 'fa, ar, he, ur');
+        /** @var string */
+        $value = (string) $this->getSettingOption('irmmr-rtl.rtl_languages', 'fa, ar, he, ur');
 
         $languages = array_filter(array_map(
             static fn ($lang) => strtolower(trim($lang)),

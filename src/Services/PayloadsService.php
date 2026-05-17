@@ -3,6 +3,8 @@
 namespace Irmmr\FlarumRtlSupport\Services;
 
 use Flarum\Settings\SettingsRepositoryInterface;
+use Irmmr\FlarumRtlSupport\Interfaces\HasSettings;
+use Irmmr\FlarumRtlSupport\Traits\SettingsTrait;
 
 use function is_array;
 use function is_string;
@@ -11,8 +13,10 @@ use function json_decode;
 use function array_filter;
 use function array_map;
 
-class PayloadsService
+class PayloadsService implements HasSettings
 {
+    use SettingsTrait;
+
     /**
      * Defined payloads.
      *
@@ -36,7 +40,7 @@ class PayloadsService
      */
     public function parsePayloads(): array
     {
-        $raw = $this->settings->get('irmmr-rtl.payloads', '');
+        $raw = $this->getSettingOption('irmmr-rtl.payloads', '');
 
         /** @var array */
         $payloads = match (true) {
