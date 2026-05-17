@@ -64,16 +64,16 @@ class AssetMappingService implements HasSettings
     {
         $raw = $this->getSettingOption('irmmr-rtl.asset_rules', '');
 
-        /** @var array */
+        /** @var array<array{pattern: string, replace: string, type: string}> */
         $rules = match (true) {
             is_string($raw) && json_validate($raw) => (array) json_decode($raw, true),
             is_array($raw) => $raw,
             default => [] 
         };
 
+        /** @var array<\Irmmr\FlarumRtlSupport\ValueObjects\AssetRule> */
         $packed = [];
 
-        /** @var array */
         foreach ($rules as $rule) {
             if (!is_array($rule)) {
                 continue;

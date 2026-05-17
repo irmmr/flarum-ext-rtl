@@ -45,7 +45,6 @@ class MirrorService implements HasSettings
      * @param SettingsRepositoryInterface $settings
      * @param Application $app
      * @param AssetMappingService $assetMappingService
-     * @param PayloadsService $payloadsService
      */
     public function __construct(
         protected SettingsRepositoryInterface $settings,
