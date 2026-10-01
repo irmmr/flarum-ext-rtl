@@ -4,6 +4,8 @@
  	"keywords": ["RTL", "flarum-rtl", "flarum", "flarum-ext"],
   	"description": "Right-to-Left (rtl) direction support for \"Flarum\" core and extensions.",
   	"license": "MIT",
+    "minimum-stability": "beta",
+    "prefer-stable": true,
     "support": {
         "issues": "https://github.com/irmmr/rtl-css/issues",
         "source": "https://github.com/irmmr/rtl-css",
