@@ -308,8 +308,10 @@ class LessCompiler extends RevisionCompiler
         $this->pendingSidecars = [];
 
         $output = $baseOutput = $this->renderOutput($sources);
-        $output = $this->useCssMinifier() ?
-            $this->minifyCssCode($output) : $output;
+        if ($output !== null) {
+            $output = $this->useCssMinifier() ?
+                $this->minifyCssCode($output) : $output;
+        }
 
         $newRevision = $output === null ? static::EMPTY_REVISION : $this->hashOutput($output);
 
