@@ -128,8 +128,9 @@ abstract class BaseContent
      */
     protected function addExtraStyles(Document $document): void
     {
-        foreach ($this->extraStyles as $style) {
-            $document->head[] = "<style>{$style}</style>";
+        if ($this->extraStyles !== []) {
+            $css = implode(' ', $this->extraStyles);
+            $document->head[] = "<style>{$css}</style>";
         }
     }
 }
