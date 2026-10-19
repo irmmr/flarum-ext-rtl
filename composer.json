@@ -26,10 +26,7 @@
 	"autoload": {
 		"psr-4": {
 			"Irmmr\\FlarumRtlSupport\\": "src/"
-		},
-		"files": [
-			"src/Overrides/Frontend/Compiler/LessCompiler.php"
-		]
+		}
 	},
 	"extra": {
 		"branch-alias": {

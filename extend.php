@@ -10,6 +10,7 @@
 
 use Flarum\Extend;
 use Irmmr\FlarumRtlSupport\Frontend\Content;
+use Irmmr\FlarumRtlSupport\Providers\CompilerServiceProvider;
 
 return [
     (new Extend\Frontend('forum'))
@@ -23,6 +24,9 @@ return [
         ->css(__DIR__ . '/less/admin.less'),
 
     new Extend\Locales(__DIR__ . '/locale'),
+
+    (new Extend\ServiceProvider())
+        ->register(CompilerServiceProvider::class),
 
     (new Extend\Settings())
         ->default('irmmr-rtl.lang_base', true)
